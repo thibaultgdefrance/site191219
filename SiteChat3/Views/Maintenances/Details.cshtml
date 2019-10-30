@@ -1,0 +1,34 @@
+﻿@model SiteChat3.Models.Maintenance
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Maintenance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DescriptionMaintenance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescriptionMaintenance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Utilisateur.NomUtilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Utilisateur.NomUtilisateur)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdMaintenance }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

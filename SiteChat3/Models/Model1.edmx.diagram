@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="528e55041e98487693583526f083c7e9" Name="Diagram1">
+        <EntityTypeShape EntityType="Chat2Model.Acces" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Chat2Model.Avatar" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Chat2Model.Discussion" Width="1.5" PointX="6" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Chat2Model.Image" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Chat2Model.Maintenance" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Chat2Model.Message" Width="1.5" PointX="8.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Chat2Model.Niveau" Width="1.5" PointX="3" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Chat2Model.Notification" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Chat2Model.StatutDiscussion" Width="1.5" PointX="3.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Chat2Model.StatutUtilisateur" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="Chat2Model.Ton" Width="1.5" PointX="6" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Chat2Model.TypeDiscussion" Width="1.5" PointX="3.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Chat2Model.TypeNotification" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Chat2Model.Utilisateur" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Chat2Model.UtilisateurDiscussion" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
+        <AssociationConnector Association="Chat2Model.FK__Utilisate__IdAcc__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="Chat2Model.FK__Utilisate__IdAva__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="Chat2Model.FK__Discussio__IdSta__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="Chat2Model.FK__Discussio__IdTyp__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="Chat2Model.FK__Message__IdDiscu__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="Chat2Model.FK__Utilisate__IdDis__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="Chat2Model.FK__Maintenan__IdUti__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="Chat2Model.FK__Message__IdTon__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="Chat2Model.FK__Message__IdUtili__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="Chat2Model.FK__Utilisate__IdNiv__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="Chat2Model.FK__Notificat__IdCre__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="Chat2Model.FK__Notificat__IdDes__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="Chat2Model.FK__Notificat__IdTyp__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="Chat2Model.FK__Utilisate__IdSta__2EA5EC27" ManuallyRouted="false" />
+        <AssociationConnector Association="Chat2Model.FK__Utilisate__IdUti__5629CD9C" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

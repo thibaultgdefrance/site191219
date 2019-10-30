@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+    
+
+}
+    <div class="form-group col-md-3">
+        <h2>Inscrivez-vous</h2>
+        @using (Html.BeginForm("Inscription", "Home", null, FormMethod.Post, new { id = "formulaireInscription" }))
+        {
+            @Html.Label("LBNom", "nom:")
+            @Html.TextBox("nomInscription", "", new { @class = "form-control" })
+            @Html.Label("LBPrenom", "prénom:")
+            @Html.TextBox("prenonInscription", "", new { @class = "form-control" })
+            @Html.Label("LBEmailInscription", "e-mail:")
+            @Html.TextBox("emailIncription", "", new { @class = "form-control" })
+            @Html.Label("LBNumero", "numero de téléphone:")
+            @Html.TextBox("numeroInscription", "", new { @class = "form-control" })
+            @Html.Label("LBPseudo", "pseudo:")
+            @Html.TextBox("pseudoInscription", "", new { @class = "form-control" })
+            @Html.Label("LBMDPInscription", "mot de passe:")
+            @Html.TextBox("MDPInscription", "", new { @class = "form-control" })
+            @Html.Label("LBMDPConfirmation", "confirmation mot de passe:")
+            @Html.TextBox("confirmationMDP", "", new { @class = "form-control" })
+            <input class="datefield" data-val="true" data-val-required="Date is required"
+                   id="dateNaissance" name="dateNaissance" type="date" value="1/11/1989" />
+
+            <input type="submit" value="s'inscrire" class="btn btn-success" />
+        }
+    </div>
+<div class="form-group col-md-2">
+    <h2>connectez-vous</h2>
+    @using (Html.BeginForm("Connexion", "Home", null, FormMethod.Post, new { id = "FormulaireConnexion" }))
+    {
+        @Html.Label("LBEmail", "email: ")
+        @Html.TextBox("mail", "", new { @class = "form-control" })
+        @Html.Label("LBMDP", "Mot de passe: ")
+        @Html.TextBox("MDP", "", new { @class = "form-control" })
+        <label>@ViewBag.messageErreureConnexion</label>
+        <input type="submit" value="se connecter" class="form-control" />
+    }
+</div>

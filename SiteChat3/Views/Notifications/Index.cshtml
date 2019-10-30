@@ -1,0 +1,63 @@
+﻿@model IEnumerable<SiteChat3.Models.Notification>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TexteNotification)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatutNotification)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdDiscussion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Utilisateur.NomUtilisateur)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Utilisateur1.NomUtilisateur)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeNotification.LibelleTypeNotification)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TexteNotification)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatutNotification)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdDiscussion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Utilisateur.NomUtilisateur)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Utilisateur1.NomUtilisateur)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeNotification.LibelleTypeNotification)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdNotification }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdNotification }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdNotification })
+        </td>
+    </tr>
+}
+
+</table>

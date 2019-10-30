@@ -1,0 +1,72 @@
+﻿body, html {
+    height: 100%;
+}
+
+body {
+    /*padding-top: 50px;*/
+    /*padding-bottom: 20px;*/
+    background-image: radial-gradient(circle, #f4ff00, #daff00, #beff00, #9eff00, #78ff00, #62ff00, #46ff01, #03ff08, #05ff06, #07ff04, #09ff02, #0bff00);
+    height: 100%;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+
+select,
+textarea {
+    max-width: 280px;
+}
+.titre {
+    font-family: 'Modak', cursive;
+    font-size:50px;
+}
+#connexion {
+}
+
+.patterns {
+    position: absolute;
+    width: -webkit-fill-available;
+}
+
+.form-control {
+    margin-bottom: 10px;
+}
+
+.formulaireconnexion {
+    background-color: white;
+    text-align: center;
+    border: 1px solid black;
+    padding: 4em;
+    top: 20em;
+    border-radius: 10px;
+}
+
+.formLogin {
+    text-align: center;
+}
+
+#listeConversation {
+    height: 55em;
+    background-color: white;
+    border-radius: 20px;
+}
+
+#partiMessage {
+    height: 200px;
+    background-color: white;
+    
+    border-radius: 20px;
+}
+.dateNaissance{
+    width:30px;
+}

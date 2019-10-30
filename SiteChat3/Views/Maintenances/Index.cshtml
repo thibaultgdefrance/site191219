@@ -1,0 +1,39 @@
+﻿@model IEnumerable<SiteChat3.Models.Maintenance>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DescriptionMaintenance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Utilisateur.NomUtilisateur)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DescriptionMaintenance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Utilisateur.NomUtilisateur)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdMaintenance }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdMaintenance }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdMaintenance })
+        </td>
+    </tr>
+}
+
+</table>

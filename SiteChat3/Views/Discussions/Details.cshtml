@@ -1,0 +1,66 @@
+﻿@model SiteChat3.Models.Discussion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Discussion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TitreDiscussion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TitreDiscussion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreationDiscussion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreationDiscussion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DescriptionDiscussion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescriptionDiscussion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatutDiscussion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StatutDiscussion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatutDiscussion1.LibelleStatutDiscussion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StatutDiscussion1.LibelleStatutDiscussion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeDiscussion.LibelleTypeDiscussion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeDiscussion.LibelleTypeDiscussion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdDiscussion }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

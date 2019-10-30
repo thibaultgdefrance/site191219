@@ -1,0 +1,114 @@
+﻿@model SiteChat3.Models.Utilisateur
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Utilisateur</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomUtilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomUtilisateur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrenomUtilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrenomUtilisateur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PseudoUtilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PseudoUtilisateur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailUtilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailUtilisateur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateDeNaissanceUtilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateDeNaissanceUtilisateur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroUtilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroUtilisateur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MotDePasseUtilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MotDePasseUtilisateur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreationUtilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreationUtilisateur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TokenUtilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TokenUtilisateur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Acces.LibelleAcces)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Acces.LibelleAcces)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Avatar.CheminAvatar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Avatar.CheminAvatar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatutUtilisateur.LibelleStatutUtilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StatutUtilisateur.LibelleStatutUtilisateur)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdUtilisateur }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

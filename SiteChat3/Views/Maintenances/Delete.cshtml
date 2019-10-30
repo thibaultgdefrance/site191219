@@ -1,0 +1,40 @@
+﻿@model SiteChat3.Models.Maintenance
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Maintenance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DescriptionMaintenance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescriptionMaintenance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Utilisateur.NomUtilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Utilisateur.NomUtilisateur)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<SiteChat3.Models.Acces>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LibelleAcces)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValeurAcces)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LibelleAcces)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValeurAcces)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdAcces }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdAcces }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdAcces })
+        </td>
+    </tr>
+}
+
+</table>

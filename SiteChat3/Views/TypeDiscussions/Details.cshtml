@@ -1,0 +1,26 @@
+﻿@model SiteChat3.Models.TypeDiscussion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TypeDiscussion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LibelleTypeDiscussion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LibelleTypeDiscussion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdTypeDiscussion }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
