@@ -55,11 +55,12 @@ namespace SiteChat3.Controllers
             }
             else
             {
+                ViewBag.requestToken = "kjfdskjdshkjgkjfdh";
                 ViewBag.messageErreureConnexion = "email et/ou mot de passe incorrecte(s)";
                 return RedirectToAction("Index", "Home");
             };
 
-            }
+        }
 
 
         
@@ -101,7 +102,10 @@ namespace SiteChat3.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
               
                 /*ViewBag.messageErreure = "";
                 //Instanciation du client
@@ -127,7 +131,7 @@ namespace SiteChat3.Controllers
                 //mail.CC.Add(new MailAddress("toto@gmail.com"));
 
                 smtpClient.Send(mail);*/
-                return RedirectToAction("Index","Home");
+                
 
             }
 

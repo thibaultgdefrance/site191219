@@ -128,6 +128,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="ClefCryptage.cs" />
     <Compile Include="Controllers\AccesController.cs" />
     <Compile Include="Controllers\AvatarsController.cs" />
     <Compile Include="Controllers\DiscussionsController.cs" />
@@ -214,6 +215,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Medias\cafard18.png" />
+    <Content Include="Content\Medias\cafard20.png" />
+    <Content Include="Content\Medias\cafard26.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

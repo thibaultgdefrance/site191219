@@ -28,9 +28,9 @@
             <input type="submit" value="s'inscrire" class="btn btn-success" />
         }
     </div>
-<div class="form-group col-md-2">
+<div class="form-group col-md-2" >
     <h2>connectez-vous</h2>
-    @using (Html.BeginForm("Connexion", "Home", null, FormMethod.Post, new { id = "FormulaireConnexion" }))
+    @using (Html.BeginForm("Connexion", "Messages", null, FormMethod.Post, new { id = "FormulaireConnexion" }))
     {
         @Html.Label("LBEmail", "email: ")
         @Html.TextBox("mail", "", new { @class = "form-control" })
@@ -39,4 +39,8 @@
         <label>@ViewBag.messageErreureConnexion</label>
         <input type="submit" value="se connecter" class="form-control" />
     }
+</div>
+<div class="col-md-5" style="text-align:center;">
+    <h2>retrouvez-nous aussi sur votre smartphone Android</h2>
+    <img src="~/Content/Medias/cafard26.png"/>
 </div>

@@ -8,7 +8,7 @@ a.appendChild(donnee);
 //$(document).ready(function () {
     
     
-    $.ajax({
+   /* $.ajax({
         url: 'https://localhost:44372/api/Utilisateurs',
         type: 'GET',
         dataType: 'json',
@@ -21,7 +21,7 @@ a.appendChild(donnee);
 
         }
 
-    });
+    });*/
 
     
 
