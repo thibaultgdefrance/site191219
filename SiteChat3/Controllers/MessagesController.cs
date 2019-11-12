@@ -238,6 +238,13 @@ namespace SiteChat3.Controllers
 
 
             }
+
+            
+        }
+        public List<Discussion> GetDiscussions(string requestToken)
+        {
+            List<Discussion> discussions =(from d in db.Discussion select d).ToList();
+            return discussions;
         }
     }
 }

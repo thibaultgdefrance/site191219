@@ -43,7 +43,7 @@ textarea {
 }
 
 .formulaireconnexion {
-    background-color: white;
+    /*background-color: white;*/ 
     text-align: center;
     border: 1px solid black;
     padding: 4em;
@@ -57,16 +57,28 @@ textarea {
 
 #listeConversation {
     height: 55em;
-    background-color: white;
-    border-radius: 20px;
+    border-radius: 2px;
+    border: 1px solid grey;
 }
 
 #partiMessage {
     height: 200px;
-    background-color: white;
-    
+    border: 1px solid grey;
     border-radius: 20px;
 }
 .dateNaissance{
     width:30px;
+}
+.blocDiscussion{
+    width:100%;
+    overflow-y:auto;
+}
+.titreDiscussion {
+    color: grey;
+    font-size: 20px;
+    font-family: 'Press Start 2P', cursive;
+}
+.titreDiscussion:hover{
+    background-color:grey;
+    color:black;
 }
