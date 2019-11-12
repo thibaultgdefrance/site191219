@@ -74,6 +74,7 @@ textarea {
     overflow-y:auto;
 }
 .titreDiscussion {
+    width: 100%;
     color: grey;
     font-size: 20px;
     font-family: 'Press Start 2P', cursive;

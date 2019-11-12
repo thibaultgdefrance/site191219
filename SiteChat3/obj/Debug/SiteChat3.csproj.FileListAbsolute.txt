@@ -172,4 +172,3 @@ C:\inetpub\wwwroot\SiteChat3\SiteChat3\obj\Debug\SiteChat3.csproj.CoreCompileInp
 C:\inetpub\wwwroot\SiteChat3\SiteChat3\obj\Debug\SiteChat3.csproj.CopyComplete
 C:\inetpub\wwwroot\SiteChat3\SiteChat3\obj\Debug\SiteChat3.dll
 C:\inetpub\wwwroot\SiteChat3\SiteChat3\obj\Debug\SiteChat3.pdb
-C:\inetpub\wwwroot\SiteChat3\SiteChat3\obj\Debug\SiteChat3.csprojAssemblyReference.cache

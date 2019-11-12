@@ -60,11 +60,12 @@ $(document).ready(function () {
                 //discussionGroupe.textContent += data2[i].TitreDiscussion;
                 var x = document.createElement("div");
                 x.setAttribute("class", "blocDiscussion")
-                var b = document.createElement("p");
+                var b = document.createElement("button");
                 b.setAttribute("id", data2[i].IdDiscussion);
                 b.textContent = data2[i].TitreDiscussion;
                 b.setAttribute("class", "titreDiscussion");
-                b.cllick=afficherMessages(data2[i].IdDiscussion);
+                b.setAttribute("onClick", "afficherMessages("+data2[i].IdDiscussion+")");
+                b.click=afficherMessages(data2[i].IdDiscussion);
                 discussionGroupe.appendChild(x);
                 x.appendChild(b);
             }
