@@ -92,12 +92,20 @@ namespace SiteChat3.Controllers
                     utilisateur.EmailUtilisateur = collection["emailIncription"];
                     utilisateur.IdAvatar = 1;
                     utilisateur.IdAcces = 4;
-                    utilisateur.NumeroUtilisateur = collection["numeroInscription"];
+                    if (collection["numeroInscription"].ToString() == "")
+                    {
+                        utilisateur.NumeroUtilisateur = "0000000000";
+                    }
+                    else
+                    {
+                        utilisateur.NumeroUtilisateur = collection["numeroInscription"].ToString();
+                    }
+                    
                     utilisateur.DateDeNaissanceUtilisateur = Convert.ToDateTime(collection["dateNaissance"]);
                     utilisateur.DateCreationUtilisateur = DateTime.Now;
                     utilisateur.MotDePasseUtilisateur = collection["MDPInscription"];
                     utilisateur.IdStatutUtilisateur = 1;
-                    utilisateur.TokenUtilisateur = "sd4gs64g54s63s64ss4dv64";
+                    utilisateur.TokenUtilisateur = workflow.createToken();
                     db.Utilisateur.Add(utilisateur);
                     db.SaveChanges();
                     return RedirectToAction("Index");

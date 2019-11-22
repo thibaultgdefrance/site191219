@@ -64,7 +64,7 @@ textarea {
 #partiMessage {
     height: 200px;
     border: 1px solid grey;
-    border-radius: 20px;
+    
 }
 .dateNaissance{
     width:30px;
@@ -82,4 +82,54 @@ textarea {
 .titreDiscussion:hover{
     background-color:grey;
     color:black;
+}
+
+#affichageMessages {
+    border: 1px solid grey;
+    height: 60%;
+    margin: 1%;
+    overflow:auto;
+}
+#envoiMessage {
+    border: 1px solid grey;
+    height: 20%;
+    margin: 1%;
+}
+.blocMessage {
+    display: inline-block;
+    color: grey;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 3px;
+    min-width:20%;
+    max-width: 50%;
+    height:100%;
+    border: 3px solid #00fff7;
+    border-image: circle-gradient( red, blue )1 100%;
+    border-radius: 50px;
+    /*background-image: radial-gradient(circle, #f4ff00, #daff00, #beff00, #9eff00, #78ff00, #62ff00, #46ff01, #03ff08, #05ff06, #07ff04, #09ff02, #0bff00);*/
+}
+.texteMessages {
+    color: white;
+    border-radius: 50px;
+    /*background-image: linear-gradient(to right, #1c0010, #21111b, #281c25, #30282f, #383338, #383338, #383338, #383338, #30282f, #281c25, #21111b, #1c0010);*/
+    /*height: 100%;
+    width: 100%;*/
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.dateEnvoi{
+    padding:10px;
+    padding-left:20px;
+    padding-right:20px;
+}
+#messageEnCours {
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+}
+#boutonEnvoi{
+    float:right
 }
