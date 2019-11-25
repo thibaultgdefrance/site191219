@@ -147,22 +147,34 @@ namespace SiteChat3.Controllers
         [HttpPost]
         public ActionResult Connexion(FormCollection collection)
         {
-            ViewBag.messageErreureConnexion = "";
+            
             var MailUtilisateur = collection["mail"];
             var MDPUtilisateur = collection["MDP"];
-            int utilisateurExiste = (from u in db.Utilisateur where u.EmailUtilisateur == MailUtilisateur && u.MotDePasseUtilisateur == MDPUtilisateur select u).Count();
-            if (utilisateurExiste > 0)
-            {
-                ViewBag.requestToken = "kjfdskjdshkjgkjfdh";
-                return View("MessagesApi");
 
+            
+            if (MailUtilisateur=="" || MDPUtilisateur=="")
+            {
+                ViewBag.messageErreureConnexion = "email et/ou mot de passe incorrecte(s)";
+                return View("Index");
             }
             else
             {
-                
-                ViewBag.messageErreureConnexion = "email et/ou mot de passe incorrecte(s)";
-                return RedirectToAction("Index", "Home");
-            };
+                int utilisateurExiste = (from u in db.Utilisateur where u.EmailUtilisateur == MailUtilisateur && u.MotDePasseUtilisateur == MDPUtilisateur select u).Count();
+                if (utilisateurExiste > 0)
+                {
+                    Utilisateur utilisateur = (from u in db.Utilisateur where u.EmailUtilisateur == MailUtilisateur && u.MotDePasseUtilisateur == MDPUtilisateur select u).First();
+                    ViewBag.requestToken = utilisateur.TokenUtilisateur;
+                    return View("MessagesApi");
+
+                }
+                else
+                {
+
+                    ViewBag.messageErreureConnexion = "email et/ou mot de passe incorrecte(s)";
+                    return View("Index");
+                };
+            }
+            
 
         }
 

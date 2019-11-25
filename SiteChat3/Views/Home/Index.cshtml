@@ -13,24 +13,26 @@
             @Html.Label("LBPrenom", "prénom:")
             @Html.TextBox("prenonInscription", "", new { @class = "form-control" })
             @Html.Label("LBEmailInscription", "e-mail:")
-            @Html.TextBox("emailIncription", "", new { @class = "form-control" ,type="mail"})
+            @Html.TextBox("emailIncription", "", new { @class = "form-control", type = "mail" })
             @Html.Label("LBNumero", "numero de téléphone:")
-            @Html.TextBox("numeroInscription", "", new { @class = "form-control" ,type="number"})
+            @Html.TextBox("numeroInscription", "", new { @class = "form-control", type = "number" })
             @Html.Label("LBPseudo", "pseudo:")
             @Html.TextBox("pseudoInscription", "", new { @class = "form-control" })
             @Html.Label("LBMDPInscription", "mot de passe:")
-            @Html.TextBox("MDPInscription", "", new { @class = "form-control" ,type="password"})
+            @Html.TextBox("MDPInscription", "", new { @class = "form-control", type = "password" })
             @Html.Label("LBMDPConfirmation", "confirmation mot de passe:")
-            @Html.TextBox("confirmationMDP", "", new { @class = "form-control",type="password"})
+            @Html.TextBox("confirmationMDP", "", new { @class = "form-control", type = "password" })
             <input class="datefield" data-val="true" data-val-required="Date is required"
                    id="dateNaissance" name="dateNaissance" type="date" value="1/11/1989" />
 
             <input type="submit" value="s'inscrire" class="btn btn-success" />
+            
         }
+        <p style="color:red;">@ViewBag.messageErreure</p>
     </div>
 <div class="form-group col-md-2" >
     <h2>connectez-vous</h2>
-    @using (Html.BeginForm("Connexion", "Messages", null, FormMethod.Post, new { id = "FormulaireConnexion" }))
+    @using (Html.BeginForm("Connexion", "Home", null, FormMethod.Post, new { id = "FormulaireConnexion" }))
     {
         @Html.Label("LBEmail", "email: ")
         @Html.TextBox("mail", "", new { @class = "form-control" })
@@ -39,6 +41,7 @@
         <label>@ViewBag.messageErreureConnexion</label>
         <input type="submit" value="se connecter" class="form-control" />
     }
+    <p style="color:red;">@ViewBag.messageErreureConnexion</p>
 </div>
 <div class="col-md-5" style="text-align:center;">
     <h2>retrouvez-nous aussi sur votre smartphone Android</h2>

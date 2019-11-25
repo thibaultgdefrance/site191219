@@ -1,12 +1,15 @@
-﻿
-
+﻿var element = document.getElementById("affichageMessages");
 
 //afficher les messages quand on clic sur une discussion
 function afficherMessages(idDiscussion) {
     var messagesVisibles = document.getElementsByClassName("contourMessage");
     for (var i = 0; i < messagesVisibles.length; i++) {
-        messagesVisibles[i].setAttribute("style","display:none");
+        messagesVisibles[i].setAttribute("style", "height:0px;");
+        messagesVisibles[i].setAttribute("style", "display:none;");
+
     }
+
+    
     console.log("IdDiscussion=" + idDiscussion);
     $.ajax({
         url: 'http://localhost:61994/api/Messages?IdDiscussion=7',
@@ -33,7 +36,8 @@ function afficherMessages(idDiscussion) {
                 var retour = document.createElement("br");
                 document.getElementById("affichageMessages").appendChild(retour);
             }
- 
+
+            element.scrollTop = element.scrollHeight;
  
         },
  
@@ -112,3 +116,6 @@ function envoyerMessage(){
 
     });
 }
+
+
+element.scrollTop = element.scrollHeight;

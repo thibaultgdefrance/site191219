@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "MessagesApi";
+}
+<style>
+    body {
+        background-image: linear-gradient(to right, #1c0010, #21111b, #281c25, #30282f, #383338, #383338, #383338, #383338, #30282f, #281c25, #21111b, #1c0010);
+    }
+</style>
+<p id="truc">
+
+    @ViewBag.requestToken
+
+</p>
+<div class="row" style="text-align:center">
+    <div class="col-md-2 col-md-offset-4">
+        <input type="text" placeholder="recherche" class="form-control" />
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-2" id="listeConversation" style="height:80vh;">
+        <div class="row" id="discussionsGroupe" style="border:1px solid grey;height:50%;">
+
+        </div>
+        <div class="row" id="contacts" style="border:1px solid grey;height:50%;">
+
+        </div>
+
+    </div>
+    <div class="col-md-10" id="partiMessage" style="height:80vh;">
+        <div class="row" id="affichageMessages">
+
+        </div>
+        <div class="row" id="envoiMessage">
+            <input type="text" id="messageEnCours" class="form-control" placeholder="tapez votre message" />
+        </div>
+        <button class="btn btn-success" id="boutonEnvoi" onclick="envoyerMessage()">envoyer</button>
+    </div>
+</div>
+<script src="~/Scripts/MessagesApi.js"></script>
