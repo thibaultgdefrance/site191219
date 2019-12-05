@@ -28,6 +28,7 @@ namespace SiteChat3.Models
         public Nullable<byte> StatutDiscussion { get; set; }
         public int IdTypeDiscussion { get; set; }
         public int IdStatutDiscussion { get; set; }
+        public string TokenDiscussion { get; set; }
     
         public virtual StatutDiscussion StatutDiscussion1 { get; set; }
         public virtual TypeDiscussion TypeDiscussion { get; set; }

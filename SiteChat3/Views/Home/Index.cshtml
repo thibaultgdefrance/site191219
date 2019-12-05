@@ -38,7 +38,7 @@
         @Html.TextBox("mail", "", new { @class = "form-control" })
         @Html.Label("LBMDP", "Mot de passe: ")
         @Html.TextBox("MDP", "", new { @class = "form-control",type="password"})
-        <label>@ViewBag.messageErreureConnexion</label>
+        
         <input type="submit" value="se connecter" class="form-control" />
     }
     <p style="color:red;">@ViewBag.messageErreureConnexion</p>

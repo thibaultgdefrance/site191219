@@ -26,6 +26,7 @@
     <Property Name="StatutDiscussion" Type="tinyint" />
     <Property Name="IdTypeDiscussion" Type="int" Nullable="false" />
     <Property Name="IdStatutDiscussion" Type="int" Nullable="false" />
+    <Property Name="TokenDiscussion" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="Image">
     <Key>

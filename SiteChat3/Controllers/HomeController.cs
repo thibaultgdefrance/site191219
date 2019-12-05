@@ -62,6 +62,8 @@ namespace SiteChat3.Controllers
                 if (utilisateurExiste > 0)
                 {
                     Utilisateur utilisateur = (from u in db.Utilisateur where u.EmailUtilisateur == MailUtilisateur && u.MotDePasseUtilisateur == MDPUtilisateur select u).First();
+                    System.Web.HttpContext.Current.Session["acces"] = utilisateur.IdAcces;
+                    
                     ViewBag.requestToken = utilisateur.TokenUtilisateur;
                     return View("MessagesApi");
 
@@ -200,8 +202,11 @@ namespace SiteChat3.Controllers
 
 
         }
+        public ActionResult MessagesApi()
+        {
+            return View();
+        }
 
-        
 
     }
 }

@@ -7,11 +7,7 @@
         background-image: linear-gradient(to right, #1c0010, #21111b, #281c25, #30282f, #383338, #383338, #383338, #383338, #30282f, #281c25, #21111b, #1c0010);
     }
 </style>
-<p id="truc">
 
-    @ViewBag.requestToken
-
-</p>
 <div class="row" style="text-align:center">
     <div class="col-md-2 col-md-offset-4">
         <input type="text" placeholder="recherche" class="form-control" />
@@ -20,22 +16,73 @@
 </div>
 <div class="row">
     <div class="col-md-2" id="listeConversation" style="height:80vh;">
-        <div class="row" id="discussionsGroupe" style="border:1px solid grey;height:50%;">
+        <h3 class="titreInfo">vos discussions</h3>
+        <div  id="discussionsGroupe" style="border:1px solid grey;height:45%;width:100%">
+
 
         </div>
-        <div class="row" id="contacts" style="border:1px solid grey;height:50%;">
+        <input type="submit" data-toggle="modal" data-target="#exampleModal" value="créer une discussion" style="width:100%;margin:0px;"/>
+        <h3 class="titreInfo">vos contacts</h3>
+        <div class="row" id="contacts" style="border:1px solid grey;height:50%;width:-moz-fit-content">
 
         </div>
 
     </div>
-    <div class="col-md-10" id="partiMessage" style="height:80vh;">
+    <div class="col-md-8" id="partiMessage" style="height:80vh;">
         <div class="row" id="affichageMessages">
 
         </div>
         <div class="row" id="envoiMessage">
-            <input type="text" id="messageEnCours" class="form-control" placeholder="tapez votre message" />
+            <textarea id="messageEnCours" class="form-control" placeholder="tapez votre message"></textarea>
         </div>
         <button class="btn btn-success" id="boutonEnvoi" onclick="envoyerMessage()">envoyer</button>
     </div>
+    <div class="col-md-2" id="partiInfo" style="height:80vh;">
+        <h3 class="titreInfo">Info discussion</h3>
+    </div>
 </div>
+
+
+
+<input type="hidden" value=@ViewBag.requestToken id="utilisateurToken"/>
+<input type="hidden" id="discussionToken" />
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">nom de la discussion:</label>
+                        <input type="text" class="form-control" id="nomDiscussion">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">description(quelques mots pour éxpliquer votre discussion) :</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary" id="creationDiscussion">créer la discussion</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script src="~/Scripts/MessagesApi.js"></script>
+
+
+
+
+
+
+

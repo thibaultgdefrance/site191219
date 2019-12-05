@@ -138,11 +138,11 @@ namespace SiteChat3.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult MessagesApi()
+        /*public ActionResult MessagesApi()
         {
             
             return View();
-        }
+        }*/
 
         [HttpPost]
         public ActionResult Connexion(FormCollection collection)

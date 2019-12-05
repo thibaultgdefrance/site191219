@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Chat2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Chat2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Acces">
           <Key>
             <PropertyRef Name="IdAcces" />
@@ -31,6 +31,7 @@
           <Property Name="StatutDiscussion" Type="tinyint" />
           <Property Name="IdTypeDiscussion" Type="int" Nullable="false" />
           <Property Name="IdStatutDiscussion" Type="int" Nullable="false" />
+          <Property Name="TokenDiscussion" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Image">
           <Key>
@@ -398,8 +399,7 @@
             <End Role="UtilisateurDiscussion" EntitySet="UtilisateurDiscussion" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Chat2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -435,6 +435,7 @@
           <NavigationProperty Name="TypeDiscussion" Relationship="Self.FK__Discussio__IdTyp__4BAC3F29" FromRole="Discussion" ToRole="TypeDiscussion" />
           <NavigationProperty Name="Message" Relationship="Self.FK__Message__IdDiscu__5BE2A6F2" FromRole="Discussion" ToRole="Message" />
           <NavigationProperty Name="UtilisateurDiscussion" Relationship="Self.FK__Utilisate__IdDis__571DF1D5" FromRole="Discussion" ToRole="UtilisateurDiscussion" />
+          <Property Name="TokenDiscussion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Image">
           <Key>
@@ -852,6 +853,7 @@
           <EntitySetMapping Name="Discussion">
             <EntityTypeMapping TypeName="Chat2Model.Discussion">
               <MappingFragment StoreEntitySet="Discussion">
+                <ScalarProperty Name="TokenDiscussion" ColumnName="TokenDiscussion" />
                 <ScalarProperty Name="IdDiscussion" ColumnName="IdDiscussion" />
                 <ScalarProperty Name="TitreDiscussion" ColumnName="TitreDiscussion" />
                 <ScalarProperty Name="DateCreationDiscussion" ColumnName="DateCreationDiscussion" />

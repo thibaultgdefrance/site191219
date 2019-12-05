@@ -21,6 +21,7 @@
     <EntitySetMapping Name="Discussion">
       <EntityTypeMapping TypeName="Chat2Model.Discussion">
         <MappingFragment StoreEntitySet="Discussion">
+          <ScalarProperty Name="TokenDiscussion" ColumnName="TokenDiscussion" />
           <ScalarProperty Name="IdDiscussion" ColumnName="IdDiscussion" />
           <ScalarProperty Name="TitreDiscussion" ColumnName="TitreDiscussion" />
           <ScalarProperty Name="DateCreationDiscussion" ColumnName="DateCreationDiscussion" />

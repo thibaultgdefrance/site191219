@@ -32,6 +32,7 @@
     <NavigationProperty Name="TypeDiscussion" Relationship="Self.FK__Discussio__IdTyp__4BAC3F29" FromRole="Discussion" ToRole="TypeDiscussion" />
     <NavigationProperty Name="Message" Relationship="Self.FK__Message__IdDiscu__5BE2A6F2" FromRole="Discussion" ToRole="Message" />
     <NavigationProperty Name="UtilisateurDiscussion" Relationship="Self.FK__Utilisate__IdDis__571DF1D5" FromRole="Discussion" ToRole="UtilisateurDiscussion" />
+    <Property Name="TokenDiscussion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Image">
     <Key>
