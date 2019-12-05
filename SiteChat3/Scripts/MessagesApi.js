@@ -147,14 +147,51 @@ function envoyerMessage() {
     
 }
 
-//créer une discussion de groupe
-document.getElementById("creationDiscussion").addEventListener("click", function{
-    console.log("discussion de groupe créee");
+function creerModal() {
+    console.log("modal créee");
+    var modal = document.createElement("div");
+    var labelTitre = document.createElement("label");
+    labelTitre.textContent = "Titre de votre discussion";
+    var inputTitre = document.createElement("input");
+    inputTitre.setAttribute("class", "form-control");
+    inputTitre.setAttribute("id", "titreDiscussionCreee");
+    var labelDescription = document.createElement("label");
+    labelDescription.textContent = "description de la discussion";
+    var taDescription = document.createElement("textarea");
+    taDescription.setAttribute("class", "form-control");
+    taDescription.setAttribute("id", "tadescription");
+    var btnCreationDiscussion = document.createElement("input");
+    btnCreationDiscussion.setAttribute("type", "submit");
+    btnCreationDiscussion.setAttribute("class", "btn btn-succes");
+    btnCreationDiscussion.setAttribute("onclick", "creationDiscussion()");
+    var btnAnnulerDiscussion = document.createElement("input");
+    btnAnnulerDiscussion.setAttribute("type", "submit");
+    btnAnnulerDiscussion.setAttribute("class", "btn btn-alert");
+    btnAnnulerDiscussion.setAttribute("onclick", "fermerModal()");
+    btnAnnulerDiscussion.setAttribute("value","annuler")
+    modal.appendChild(labelTitre);
+    modal.appendChild(inputTitre);
+    modal.appendChild(labelDescription);
+    modal.appendChild(taDescription);
+    modal.appendChild(btnCreationDiscussion);
+    modal.appendChild(btnAnnulerDiscussion);
+    modal.setAttribute("style", "background-color:white;height:40%;width:40%;position;position:fixed;top:20vh;left:20vw;border-radius:20px;padding:50px;");
+    modal.setAttribute("class", "modalDiscussion");
+    document.body.appendChild(modal);
+}
 
-});
-
-
+function fermerModal() {
+    console.log("discussion annnuler")
+    var modals = document.getElementsByClassName("modalDiscussion");
+    for (var i = 0; i < modals.length; i++) {
+        modals[i].setAttribute("style", "display:none;");
+    }
+    document.getElementById("titreDiscussionCreee").setAttribute("id", "none");
+    document.getElementById("tadescription").setAttribute("id", "none");
+}
 
 element.scrollTop = element.scrollHeight;
 
-
+function creationDiscussion() {
+    fermerModal();
+}

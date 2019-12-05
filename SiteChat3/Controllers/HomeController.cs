@@ -131,6 +131,7 @@ namespace SiteChat3.Controllers
                 int utilisateurExiste = (from u in db.Utilisateur where u.EmailUtilisateur == MailUtilisateur select u).Count();
                 if (utilisateurExiste > 0)
                 {
+                    
                     Console.WriteLine("ok");
                     ViewBag.MessageErreure = "un compte associé à cette adresse mail existe déjà";
                     return View("index");
@@ -161,6 +162,15 @@ namespace SiteChat3.Controllers
                         utilisateur.MotDePasseUtilisateur = collection["MDPInscription"];
                         utilisateur.IdStatutUtilisateur = 1;
                         utilisateur.TokenUtilisateur = workflow.createToken();
+                        int tokenExist = (from u in db.Utilisateur where u.TokenUtilisateur == utilisateur.TokenUtilisateur select u).Count();
+                        if (tokenExist>0)
+                        {
+                            while (tokenExist>0)
+                            {
+                                utilisateur.TokenUtilisateur = workflow.createToken();
+                                tokenExist= (from u in db.Utilisateur where u.TokenUtilisateur == utilisateur.TokenUtilisateur select u).Count();
+                            }
+                        }
                         db.Utilisateur.Add(utilisateur);
                         db.SaveChanges();
                         return RedirectToAction("Index");
