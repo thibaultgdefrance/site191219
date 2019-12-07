@@ -15,12 +15,12 @@ function creerDiscussion() {
 //afficher les messages quand on clic sur une discussion
 function afficherMessages(discussionToken2) {
     var messagesVisibles = document.getElementsByClassName("contourMessage");
-    
-    for (var i = 0; i < messagesVisibles.length; i++) {
+    document.getElementById("affichageMessages").innerHTML = "";
+    /*for (var i = 0; i < messagesVisibles.length; i++) {
         messagesVisibles[i].setAttribute("style", "height:0px;");
         messagesVisibles[i].setAttribute("style", "display:none;");
 
-    }
+    }*/
     console.log(discussionToken2);
     document.getElementById("discussionToken").value = discussionToken2;
     var tokenDiscussion = discussionToken2;
@@ -72,50 +72,54 @@ function afficherMessages(discussionToken2) {
 
 //var a = document.getElementById("truc")
 //var donnee = document.createElement("p");
-var discussionGroupe = document.createElement("p");
+
 
 //a.appendChild(donnee);
-discussionsGroupe.appendChild(discussionGroupe);
 
 
-//afficher les discussions de l'utilisateur au lancement de la page
 
-$(document).ready(function () {
+//afficher les discussions de l'utilisateur 
+
+
+function afficherDiscussions() {
+    document.getElementById("discussionsGroupe").innerHTML = "";
+        var discussionGroupe = document.createElement("p");
+        discussionsGroupe.appendChild(discussionGroupe);
+        var utilisateurToken = document.getElementById('utilisateurToken').value;
+        var urlGetDiscussion = 'http://localhost:61994/api/Discussions?token=' + utilisateurToken;
+        console.log(urlGetDiscussion);
+        $.ajax({
+            url: urlGetDiscussion,
+            type: 'GET',
+            dataType: 'json',
+            success: function (data2) {
+                for (var i = 0; i < data2.length; i++) {
+                    //discussionGroupe.textContent += data2[i].TitreDiscussion;
+                    var x = document.createElement("div");
+                    x.setAttribute("class", "blocDiscussion")
+                    var b = document.createElement("button");
+                    b.setAttribute("id", data2[i].TokenDiscussion);
+                    b.textContent = data2[i].TitreDiscussion;
+                    b.setAttribute("class", "titreDiscussion");
+                    b.setAttribute("onClick", "afficherMessages(" + "'" + data2[i].TokenDiscussion + "'" + ")");
+
+
+                    discussionGroupe.appendChild(x);
+                    x.appendChild(b);
+                }
+
+
+            },
+
+            error: function () {
+
+            }
+
+        });
+    }    
     
 
-    var utilisateurToken = document.getElementById('utilisateurToken').value;
-    var urlGetDiscussion = 'http://localhost:61994/api/Discussions?token='+utilisateurToken;
-    console.log(urlGetDiscussion);
-    $.ajax({
-        url: urlGetDiscussion,
-        type: 'GET',
-        dataType: 'json',
-        success: function (data2) {
-            for (var i = 0; i < data2.length; i++) {
-                //discussionGroupe.textContent += data2[i].TitreDiscussion;
-                var x = document.createElement("div");
-                x.setAttribute("class", "blocDiscussion")
-                var b = document.createElement("button");
-                b.setAttribute("id", data2[i].TokenDiscussion);
-                b.textContent = data2[i].TitreDiscussion;
-                b.setAttribute("class", "titreDiscussion");
-                b.setAttribute("onClick", "afficherMessages(" +"'"+ data2[i].TokenDiscussion +"'"+ ")");
-               
-               
-                discussionGroupe.appendChild(x);
-                x.appendChild(b);
-            }
-            
-            
-        },
-
-        error: function () {
-
-        }
-
-    });
-
-});
+afficherDiscussions()
 
 //envoyer le message dans la discussion corespondante
 
@@ -161,6 +165,7 @@ function creerModal() {
     taDescription.setAttribute("class", "form-control");
     taDescription.setAttribute("id", "tadescription");
     var btnCreationDiscussion = document.createElement("input");
+    btnCreationDiscussion.setAttribute("value", "créer");
     btnCreationDiscussion.setAttribute("type", "submit");
     btnCreationDiscussion.setAttribute("class", "btn btn-succes");
     btnCreationDiscussion.setAttribute("onclick", "creationDiscussion()");
@@ -193,5 +198,44 @@ function fermerModal() {
 element.scrollTop = element.scrollHeight;
 
 function creationDiscussion() {
-    fermerModal();
+    var titre = document.getElementById("titreDiscussionCreee").value;
+    var description = document.getElementById("tadescription").value;
+    var createur = document.getElementById("utilisateurToken").value;
+    var urlPostDiscussion = "http://localhost:61994/api/Discussions?titre=" + titre + "&description=" + description + "&tokenUtilisateur=" + createur;
+    $.ajax({
+        url: urlPostDiscussion,
+        dataType: 'json',
+        method: 'POST',
+        success: function (data) {
+            var urlPostUtilisateurDiscussion = "http://localhost:61994/api/UtilisateurDiscussions?utilisateurToken=" + createur;
+            $.ajax({
+                url: urlPostUtilisateurDiscussion,
+                dataType: 'json',
+                method: 'POST',
+                success: function (data) {
+                    fermerModal();
+                    afficherDiscussions();
+
+                }
+
+
+                ,
+
+                error: function () {
+                    console.log("érreure");
+                }
+            })
+            
+        }
+
+
+        ,
+
+        error: function () {
+            console.log("érreure");
+        }
+    })
+    
+
+   
 }
