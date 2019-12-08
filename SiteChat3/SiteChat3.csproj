@@ -218,6 +218,7 @@
     <Content Include="Content\Medias\cafard18.png" />
     <Content Include="Content\Medias\cafard20.png" />
     <Content Include="Content\Medias\cafard26.png" />
+    <Content Include="Content\Medias\cafard29.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
