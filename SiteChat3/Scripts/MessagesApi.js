@@ -21,10 +21,12 @@ function afficherMessages(discussionToken2) {
         messagesVisibles[i].setAttribute("style", "display:none;");
 
     }*/
+    ;
     console.log(discussionToken2);
     document.getElementById("discussionToken").value = discussionToken2;
     var tokenDiscussion = discussionToken2;
-    var urlMessages = "http://localhost:61994/api/Messages?tokenDiscussion="+tokenDiscussion;
+    var urlMessages = "http://localhost:61994/api/Messages?tokenDiscussion=" + tokenDiscussion;
+    var urlMessages = "http://localhost:61994/api/Messages?tokenDiscussion=" + tokenDiscussion + "&tokenUtilisateur=" + document.getElementById("utilisateurToken").value;
     console.log(urlMessages);
     
     $.ajax({
@@ -38,9 +40,17 @@ function afficherMessages(discussionToken2) {
                 for (var i = 0; i < data3.length; i++) {
                     //discussionGroupe.textContent += data2[i].TitreDiscussion;
                     var contourMessage = document.createElement("div");
-                    contourMessage.setAttribute("class", "contourMessage")
+
+
                     var blocMessage = document.createElement("div");
-                    blocMessage.setAttribute("class", "blocMessage")
+                    blocMessage.setAttribute("id", "blocMessage" + i);
+                    if (data3[i].Verif) {
+                        blocMessage.setAttribute("class", "blocMessage2");
+                    } else {
+                        blocMessage.setAttribute("class", "blocMessage");
+                    }
+
+
                     var texteMessage = document.createElement("p");
                     var dateEnvoi = document.createElement("p");
                     dateEnvoi.textContent = data3[i].PseudoUtilisateur + " " + data3[i].DateEnvoi;
@@ -54,27 +64,25 @@ function afficherMessages(discussionToken2) {
                     blocMessage.appendChild(dateEnvoi);
                     var retour = document.createElement("br");
                     document.getElementById("affichageMessages").appendChild(retour);
+                    document.getElementById("titreDiscussionEnCour").innerText = data3[i].TitreDiscussion;
+
                 }
 
                 element.scrollTop = element.scrollHeight;
             }
-            
- 
         },
- 
+
+
         error: function () {
             console.log("erreure");
         }
- 
-    });
+
+    });    
+    
 }
 
 
-//var a = document.getElementById("truc")
-//var donnee = document.createElement("p");
 
-
-//a.appendChild(donnee);
 
 
 
@@ -121,7 +129,7 @@ function afficherDiscussions() {
 
 afficherDiscussions()
 
-//envoyer le message dans la discussion corespondante
+//envoyer le message dans la discussion correspondante
 
 function envoyerMessage() {
 
@@ -196,6 +204,11 @@ function fermerModal() {
 }
 
 element.scrollTop = element.scrollHeight;
+
+
+
+//créer une discussion
+
 
 function creationDiscussion() {
     var titre = document.getElementById("titreDiscussionCreee").value;

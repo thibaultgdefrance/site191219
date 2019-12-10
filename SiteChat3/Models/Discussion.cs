@@ -29,7 +29,9 @@ namespace SiteChat3.Models
         public int IdTypeDiscussion { get; set; }
         public int IdStatutDiscussion { get; set; }
         public string TokenDiscussion { get; set; }
+        public Nullable<int> IdCreateur { get; set; }
     
+        public virtual Utilisateur Utilisateur { get; set; }
         public virtual StatutDiscussion StatutDiscussion1 { get; set; }
         public virtual TypeDiscussion TypeDiscussion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -13,7 +13,7 @@ namespace SiteChat3.Controllers
     public class HomeController : Controller
     {
         
-        Chat2Entities db = new Chat2Entities();
+        Chat2Entities1 db = new Chat2Entities1();
         Workflow workflow = new Workflow();
         [DataType(DataType.Date)]
         public DateTime DateNaissance { get; set; }
@@ -62,7 +62,9 @@ namespace SiteChat3.Controllers
                 if (utilisateurExiste > 0)
                 {
                     Utilisateur utilisateur = (from u in db.Utilisateur where u.EmailUtilisateur == MailUtilisateur && u.MotDePasseUtilisateur == MDPUtilisateur select u).First();
-                    System.Web.HttpContext.Current.Session["acces"] = utilisateur.IdAcces;
+                    
+                    System.Web.HttpContext.Current.Session["accesUtilisateur"] = utilisateur.IdAcces;
+                    int acces = (int)System.Web.HttpContext.Current.Session["accesUtilisateur"];
                     
                     ViewBag.requestToken = utilisateur.TokenUtilisateur;
                     return View("MessagesApi");
@@ -87,6 +89,7 @@ namespace SiteChat3.Controllers
         
         public  ActionResult Inscription(FormCollection collection)
         {
+            string cgu = collection["CGU"];
             if (collection["nomInscription"]=="")
             {
                 ViewBag.messageErreure = "le champ nom est obligatoire";
@@ -122,6 +125,11 @@ namespace SiteChat3.Controllers
             else if (collection["dateNaissance"] == "")
             {
                 ViewBag.messageErreure = "veillez renseigner votre date de naissance";
+                return View("index");
+            }
+            else if (collection["CGU"]=="false")
+            {
+                ViewBag.messageErreure = "Vous devez accepter les condition d'utilisation";
                 return View("index");
             }
             else
@@ -214,9 +222,20 @@ namespace SiteChat3.Controllers
         }
         public ActionResult MessagesApi()
         {
-            return View();
+
+            if (workflow.verifierAcces()==true)
+            {
+                return View();
+            }
+
+            return View("Index");
+
         }
 
-
+        public ActionResult Deconnexion()
+        {
+            System.Web.HttpContext.Current.Session["acces"] = 4;
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

@@ -17,10 +17,21 @@
 </style>
 
 <div class="row" style="text-align:center">
-    <div class="col-md-2 col-md-offset-4">
+    <div class="offset-md-2 col-md-2"><p id="titreDiscussionEnCour" style="overflow-x:auto;font-size:20px;color:grey;"></p></div>
+    <div class="col-md-2" >
         <input type="text" placeholder="recherche" class="form-control" />
     </div>
+    <div class="col-md-offset-4 col-md-1">
+        @using (Html.BeginForm("Deconnexion", "Home", null, FormMethod.Post))
+        {
+           
+                   
 
+            <input type="submit" value="deconnexion" class="btn btn-success" />
+
+        }
+        
+    </div>
 </div>
 <div class="row">
     <div class="col-md-2" id="listeConversation" style="height:80vh;">
@@ -79,7 +90,6 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                 <button type="button" class="btn btn-primary" id="creationDiscussion">créer la discussion</button>
-                
             </div>
         </div>
     </div>

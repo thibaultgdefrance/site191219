@@ -17,6 +17,7 @@ namespace SiteChat3.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Utilisateur()
         {
+            this.Discussion = new HashSet<Discussion>();
             this.Maintenance = new HashSet<Maintenance>();
             this.Message = new HashSet<Message>();
             this.Notification = new HashSet<Notification>();
@@ -40,6 +41,8 @@ namespace SiteChat3.Models
     
         public virtual Acces Acces { get; set; }
         public virtual Avatar Avatar { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Discussion> Discussion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Maintenance> Maintenance { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

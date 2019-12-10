@@ -22,11 +22,13 @@
             @Html.TextBox("MDPInscription", "", new { @class = "form-control", type = "password" })
             @Html.Label("LBMDPConfirmation", "confirmation mot de passe:")
             @Html.TextBox("confirmationMDP", "", new { @class = "form-control", type = "password" })
+
             <input class="datefield" data-val="true" data-val-required="Date is required"
                    id="dateNaissance" name="dateNaissance" type="date" value="1/11/1989" />
-
+            @Html.Label("LBCGU", "J'ai lu et j'accepte les conditions générales d'utilisation.")
+            @Html.CheckBox("CGU")
             <input type="submit" value="s'inscrire" class="btn btn-success" />
-            
+
         }
         <p style="color:red;">@ViewBag.messageErreure</p>
     </div>

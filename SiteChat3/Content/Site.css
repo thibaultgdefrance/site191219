@@ -127,9 +127,24 @@ textarea {
     max-width: 50%;
     height:100%;
     border: 3px solid #00fff7;
-    border-image: circle-gradient( red, blue )1 100%;
     border-radius: 50px;
     /*background-image: radial-gradient(circle, #f4ff00, #daff00, #beff00, #9eff00, #78ff00, #62ff00, #46ff01, #03ff08, #05ff06, #07ff04, #09ff02, #0bff00);*/
+}
+
+.blocMessage2 {
+    display: inline-block;
+    color: grey;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 3px;
+    min-width: 20%;
+    max-width: 50%;
+    height: 100%;
+    border: 3px solid #00FF00;
+    border-radius: 50px;
+    right:0px;
 }
 .texteMessages {
     color: white;
