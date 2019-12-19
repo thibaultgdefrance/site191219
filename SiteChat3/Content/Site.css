@@ -176,11 +176,11 @@ textarea {
     height: auto;
     min-height: 100px;
     max-width: 50%;
-    max-height:1000px;
+    max-height: 1000px;
     border: 1px solid grey;
-    display:inline-block;
-    border-radius:20px;
-
+    display: inline-block;
+    border-radius: 20px;
+    background-color:#eded5f;
 }
 
 
@@ -193,10 +193,11 @@ textarea {
     border: 1px solid grey;
     display: inline-block;
     border-radius: 20px;
+    background-color: #aee6e2;
 }
 
 .texteMessages {
-    color: white;
+    color: black;
     border-radius: 50px;
     /*background-image: linear-gradient(to right, #1c0010, #21111b, #281c25, #30282f, #383338, #383338, #383338, #383338, #30282f, #281c25, #21111b, #1c0010);*/
     /*height: 100%;

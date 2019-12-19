@@ -50,7 +50,7 @@ function afficherMessages(discussionToken2,typeDiscussion) {
     document.getElementById("typeDiscussion").value = typeDiscussion;
     var tokenDiscussion = discussionToken2;
 
-    var urlMessages = "http://localhost:61994/api/Messages?tokenDiscussion=" + document.getElementById("discussionToken").value + "&tokenUtilisateur=" + document.getElementById("utilisateurToken").value;
+    var urlMessages = "http://10.115.145.44:80/api/Messages?tokenDiscussion=" + document.getElementById("discussionToken").value + "&tokenUtilisateur=" + document.getElementById("utilisateurToken").value;
     console.log(urlMessages);
     
     $.ajax({
@@ -126,7 +126,7 @@ function afficherMessages(discussionToken2,typeDiscussion) {
 //afficher les infos d'une discussion
 function afficherInfo(typeDiscussion) {
     console.log("affichageInfo" + typeDiscussion);
-    var urlInfo = "http://localhost:61994/api/Utilisateurs?tokenDiscussion=" + document.getElementById("discussionToken").value + "&tokenUtilisateur=" + document.getElementById("utilisateurToken").value;
+    var urlInfo = "http://10.115.145.44:80/api/Utilisateurs?tokenDiscussion=" + document.getElementById("discussionToken").value + "&tokenUtilisateur=" + document.getElementById("utilisateurToken").value;
     $.ajax({
         url: urlInfo,
         type: 'GET',
@@ -221,7 +221,7 @@ function afficherDiscussions() {
         var discussionGroupe = document.createElement("p");
         discussionsGroupe.appendChild(discussionGroupe);
         var utilisateurToken = document.getElementById('utilisateurToken').value;
-        var urlGetDiscussion = 'http://localhost:61994/api/Discussions?token=' + utilisateurToken;
+    var urlGetDiscussion = 'http://10.115.145.44:80/api/Discussions?token=' + utilisateurToken;
         console.log("!!"+urlGetDiscussion);
         $.ajax({
             url: urlGetDiscussion,
@@ -264,7 +264,7 @@ function afficherContacts() {
     
     
     
-    var urlGetContact = "http://localhost:61994/api/Discussions?token=" + document.getElementById("utilisateurToken").value + "&dif=1";
+    var urlGetContact = "http://10.115.145.44:80/api/Discussions?token=" + document.getElementById("utilisateurToken").value + "&dif=1";
     $.ajax({
         url: urlGetContact,
         dataType: 'json',
@@ -327,7 +327,7 @@ function envoyerMessage() {
     console.log("message envoyé");
     tokenDiscussion = document.getElementById("discussionToken").value;
     var message = document.getElementById("messageEnCours").value;
-    var urlPostMessage = "http://localhost:61994/api/Messages?tokenUtilisateur=" + tokenUtilisateur.value + "&tokenDiscussion=" + tokenDiscussion + "&texteMessage="+message+"";
+    var urlPostMessage = "http://10.115.145.44:80/api/Messages?tokenUtilisateur=" + tokenUtilisateur.value + "&tokenDiscussion=" + tokenDiscussion + "&texteMessage="+message+"";
     console.log(urlPostMessage);
     $.ajax({
         url: urlPostMessage,
@@ -426,13 +426,13 @@ function creationDiscussion() {
         }
 
     } else {
-        var urlPostDiscussion = "http://localhost:61994/api/Discussions?titre=" + titre + "&description=" + description + "&tokenUtilisateur=" + createur;
+        var urlPostDiscussion = "http://10.115.145.44:80/api/Discussions?titre=" + titre + "&description=" + description + "&tokenUtilisateur=" + createur;
         $.ajax({
             url: urlPostDiscussion,
             dataType: 'json',
             method: 'POST',
             success: function (data) {
-                var urlPostUtilisateurDiscussion = "http://localhost:61994/api/UtilisateurDiscussions?utilisateurToken=" + createur;
+                var urlPostUtilisateurDiscussion = "http://10.115.145.44:80/api/UtilisateurDiscussions?utilisateurToken=" + createur;
                 $.ajax({
                     url: urlPostUtilisateurDiscussion,
                     dataType: 'json',
@@ -480,7 +480,7 @@ function rechercheParticipant(cible) {
         var texteRecherche = document.getElementById("barreDeRecherche").value;
     }
     
-    var urlRecherche = "http://localhost:61994/api/Utilisateurs?entree="+texteRecherche;
+    var urlRecherche = "http://10.115.145.44:80/api/Utilisateurs?entree="+texteRecherche;
     console.log(urlRecherche);
     $.ajax({
         url: urlRecherche,
@@ -534,7 +534,7 @@ function rechercheContact(cible) {
         var texteRecherche = document.getElementById("barreDeRecherche").value;
     }
 
-    var urlRecherche = "http://localhost:61994/api/Utilisateurs?entree=" + texteRecherche;
+    var urlRecherche = "http://10.115.145.44:80/api/Utilisateurs?entree=" + texteRecherche;
     console.log(urlRecherche);
     $.ajax({
         url: urlRecherche,
@@ -622,7 +622,7 @@ function creationModalNotif(email, typeInvitation) {
 }
 
 function envoyerNotif(mail) {
-    var urlPostNotif = "http://localhost:61994/api/Notifications?tokenUtilisateur=" + document.getElementById("utilisateurToken").value + "&emailDestinataire=" + mail + "&tokenDiscussion=" + document.getElementById("discussionToken").value;
+    var urlPostNotif = "http://10.115.145.44:80/api/Notifications?tokenUtilisateur=" + document.getElementById("utilisateurToken").value + "&emailDestinataire=" + mail + "&tokenDiscussion=" + document.getElementById("discussionToken").value;
     console.log(urlPostNotif);
     $.ajax({
         url: urlPostNotif,
@@ -662,56 +662,63 @@ function afficherNotifications() {
     btnFermeture.setAttribute("style", "color:white;right:10px;top:10px;position:absolute;box-shadow: 5px 5px 20px;");
     btnFermeture.setAttribute("onclick", "fermerAffichageNotif()");
     document.getElementById("modaleAffichageNotif").appendChild(btnFermeture);
-    var urlGetNotif = "http://localhost:61994/api/Notifications?tokenUtilisateur=" + document.getElementById("utilisateurToken").value;
+    var urlGetNotif = "http://10.115.145.44:80/api/Notifications?tokenUtilisateur=" + document.getElementById("utilisateurToken").value;
     $.ajax({
         url: urlGetNotif,
         dataType: 'json',
         method: 'GET',
         success: function (data) {
-            for (var i = 0; i < data.length; i++) {
-                if (data[i].TitreDiscussion == null) {
-                    var blocNotification = document.createElement("div");
-                    blocNotification.setAttribute("id", "blocNotification" + i);
-                    var texteNotif = data[i].EmailCreateur + " veut vous ajouter à ses contacts";
-                    var pNotif = document.createElement("p");
-                    pNotif.innerText = texteNotif;
-                    var btnAccepterInvitation = document.createElement("input");
-                    btnAccepterInvitation.setAttribute("type", "submit");
-                    btnAccepterInvitation.setAttribute("class", "form-control");
-                    btnAccepterInvitation.setAttribute("value", "accepter");
-                    btnAccepterInvitation.setAttribute("onclick", "accepterContact(" + "'" + data[i].TokenNotification + "'" + "," + "'" + "blocNotification" + i + "'" + ")");
-                    var btnAnnuler = document.createElement("input");
-                    btnAnnuler.setAttribute("type", "submit");
-                    btnAnnuler.setAttribute("class", "form-control");
-                    btnAnnuler.setAttribute("value", "décliner");
-                    btnAnnuler.setAttribute("onclick", "declinerInvitation(" + "'" + data[i].TokenNotification + "'" + "," + "'" + "blocNotification" + i + "'" + ")");
-                    blocNotification.appendChild(pNotif)
-                    blocNotification.appendChild(btnAccepterInvitation);
-                    blocNotification.appendChild(btnAnnuler);
-                    document.getElementById("modaleAffichageNotif").appendChild(blocNotification);
-                } else {
-                    var blocNotification = document.createElement("div");
-                    blocNotification.setAttribute("id", "blocNotification" + i);
-                    var texteNotif = data[i].EmailCreateur + " vous invite à rejoindre la discussion " + data[i].TitreDiscussion;
-                    var pNotif = document.createElement("p");
-                    pNotif.innerText = texteNotif;
-                    var btnAccepterInvitation = document.createElement("input");
-                    btnAccepterInvitation.setAttribute("type", "submit");
-                    btnAccepterInvitation.setAttribute("class", "form-control");
-                    btnAccepterInvitation.setAttribute("value", "accepter");
-                    btnAccepterInvitation.setAttribute("onclick", "accepterInvitation(" + "'" + data[i].TokenNotification + "'" + "," + "'" + "blocNotification" + i + "'" + ")");
-                    var btnAnnuler = document.createElement("input");
-                    btnAnnuler.setAttribute("type", "submit");
-                    btnAnnuler.setAttribute("class", "form-control");
-                    btnAnnuler.setAttribute("value", "décliner");
-                    btnAnnuler.setAttribute("onclick", "declinerInvitation(" + "'" + data[i].TokenNotification + "'" + "," + "'" + "blocNotification" + i + "'" + ")");
-                    blocNotification.appendChild(pNotif)
-                    blocNotification.appendChild(btnAccepterInvitation);
-                    blocNotification.appendChild(btnAnnuler);
-                    document.getElementById("modaleAffichageNotif").appendChild(blocNotification);
+            if (data.length > 0) {
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].TitreDiscussion == null) {
+                        var blocNotification = document.createElement("div");
+                        blocNotification.setAttribute("id", "blocNotification" + i);
+                        var texteNotif = data[i].EmailCreateur + " veut vous ajouter à ses contacts";
+                        var pNotif = document.createElement("p");
+                        pNotif.innerText = texteNotif;
+                        var btnAccepterInvitation = document.createElement("input");
+                        btnAccepterInvitation.setAttribute("type", "submit");
+                        btnAccepterInvitation.setAttribute("class", "form-control");
+                        btnAccepterInvitation.setAttribute("value", "accepter");
+                        btnAccepterInvitation.setAttribute("onclick", "accepterContact(" + "'" + data[i].TokenNotification + "'" + "," + "'" + "blocNotification" + i + "'" + ")");
+                        var btnAnnuler = document.createElement("input");
+                        btnAnnuler.setAttribute("type", "submit");
+                        btnAnnuler.setAttribute("class", "form-control");
+                        btnAnnuler.setAttribute("value", "décliner");
+                        btnAnnuler.setAttribute("onclick", "declinerInvitation(" + "'" + data[i].TokenNotification + "'" + "," + "'" + "blocNotification" + i + "'" + ")");
+                        blocNotification.appendChild(pNotif)
+                        blocNotification.appendChild(btnAccepterInvitation);
+                        blocNotification.appendChild(btnAnnuler);
+                        document.getElementById("modaleAffichageNotif").appendChild(blocNotification);
+                    } else {
+                        var blocNotification = document.createElement("div");
+                        blocNotification.setAttribute("id", "blocNotification" + i);
+                        var texteNotif = data[i].EmailCreateur + " vous invite à rejoindre la discussion " + data[i].TitreDiscussion;
+                        var pNotif = document.createElement("p");
+                        pNotif.innerText = texteNotif;
+                        var btnAccepterInvitation = document.createElement("input");
+                        btnAccepterInvitation.setAttribute("type", "submit");
+                        btnAccepterInvitation.setAttribute("class", "form-control");
+                        btnAccepterInvitation.setAttribute("value", "accepter");
+                        btnAccepterInvitation.setAttribute("onclick", "accepterInvitation(" + "'" + data[i].TokenNotification + "'" + "," + "'" + "blocNotification" + i + "'" + ")");
+                        var btnAnnuler = document.createElement("input");
+                        btnAnnuler.setAttribute("type", "submit");
+                        btnAnnuler.setAttribute("class", "form-control");
+                        btnAnnuler.setAttribute("value", "décliner");
+                        btnAnnuler.setAttribute("onclick", "declinerInvitation(" + "'" + data[i].TokenNotification + "'" + "," + "'" + "blocNotification" + i + "'" + ")");
+                        blocNotification.appendChild(pNotif)
+                        blocNotification.appendChild(btnAccepterInvitation);
+                        blocNotification.appendChild(btnAnnuler);
+                        document.getElementById("modaleAffichageNotif").appendChild(blocNotification);
+                    }
+
                 }
-                
+            } else {
+                var pasDeNotification = document.createElement("p");
+                pasDeNotification.innerText = "vous n'avez pas de notification";
+                document.getElementById("modaleAffichageNotif").appendChild(pasDeNotification);
             }
+            
 
 
         }
@@ -729,7 +736,7 @@ function afficherNotifications() {
 }
 function accepterInvitation(tokenNotif, idblocNotif) {
     document.getElementById(idblocNotif).innerHTML = "";
-    var urlPostUtilisateurDiscussion = "http://localhost:61994/api/UtilisateurDiscussions?utilisateurToken=" + document.getElementById("utilisateurToken").value + "&tokenNotif=" + tokenNotif;
+    var urlPostUtilisateurDiscussion = "http://10.115.145.44:80/api/UtilisateurDiscussions?utilisateurToken=" + document.getElementById("utilisateurToken").value + "&tokenNotif=" + tokenNotif;
     $.ajax({
         url: urlPostUtilisateurDiscussion,
         dataType: 'json',
@@ -769,7 +776,7 @@ function fermerAffichageNotif() {
 
 function effacerNotif(tokenNotif, idblocNotif) {
     
-    var urlPostSuppressionNotification = "http://localhost:61994/api/Notifications?tokenNotification=" + tokenNotif;
+    var urlPostSuppressionNotification = "http://10.115.145.44:80/api/Notifications?tokenNotification=" + tokenNotif;
     $.ajax({
         url: urlPostSuppressionNotification,
         dataType: 'json',
@@ -791,7 +798,7 @@ function effacerNotif(tokenNotif, idblocNotif) {
 }
 
 function envoyerDemandeContact(mail) {
-    var urlDemandeContact = "http://localhost:61994/api/Notifications?tokenUtilisateur=" + document.getElementById("utilisateurToken").value + "&emailDestinataire=" + mail;
+    var urlDemandeContact = "http://10.115.145.44:80/api/Notifications?tokenUtilisateur=" + document.getElementById("utilisateurToken").value + "&emailDestinataire=" + mail;
     $.ajax({
         url: urlDemandeContact,
         dataType: 'json',
@@ -815,14 +822,14 @@ function envoyerDemandeContact(mail) {
 
 function accepterContact(tokenNotif,idBlocNotif) {
     document.getElementById(idBlocNotif).innerHTML = "";
-    var urlPostDiscussionContact = "http://localhost:61994/api/Discussions?tokenNotification=" + tokenNotif;
+    var urlPostDiscussionContact = "http://10.115.145.44:80/api/Discussions?tokenNotification=" + tokenNotif;
     $.ajax({
         url: urlPostDiscussionContact,
         dataType: 'json',
         method: 'POST',
         success: function (data) {
             console.log("discussion créee")
-            var urlPostUtilisateurDiscussion = "http://localhost:61994/api/UtilisateurDiscussions?utilisateurToken=" + document.getElementById("utilisateurToken").value + "&tokenNotif=" + tokenNotif + "&contact=1";
+            var urlPostUtilisateurDiscussion = "http://10.115.145.44:80/api/UtilisateurDiscussions?utilisateurToken=" + document.getElementById("utilisateurToken").value + "&tokenNotif=" + tokenNotif + "&contact=1";
             $.ajax({
                 url: urlPostUtilisateurDiscussion,
                 dataType: 'json',
@@ -842,7 +849,7 @@ function accepterContact(tokenNotif,idBlocNotif) {
                     fermerNotif();
                 }
             });
-    /*var urlPostUtilisateurDiscussion1 = "http://localhost:61994/api/UtilisateurDiscussions?utilisateurToken=" + document.getElementById("utilisateurToken").value + "&tokenNotif=" + tokenNotif + "&contact1=1";
+    /*var urlPostUtilisateurDiscussion1 = "http://10.115.145.44:80/api/UtilisateurDiscussions?utilisateurToken=" + document.getElementById("utilisateurToken").value + "&tokenNotif=" + tokenNotif + "&contact1=1";
         $.ajax({
             url: urlPostUtilisateurDiscussion1,
             dataType: 'json',
@@ -864,7 +871,7 @@ function accepterContact(tokenNotif,idBlocNotif) {
     
        
        
-        var urlPostUtilisateurDiscussion2 = "http://localhost:61994/api/UtilisateurDiscussions?utilisateurToken=" + document.getElementById("utilisateurToken").value + "&tokenNotif=" + tokenNotif + "&contact1=2";
+        var urlPostUtilisateurDiscussion2 = "http://10.115.145.44:80/api/UtilisateurDiscussions?utilisateurToken=" + document.getElementById("utilisateurToken").value + "&tokenNotif=" + tokenNotif + "&contact1=2";
         $.ajax({
             url: urlPostUtilisateurDiscussion2,
             dataType: 'json',
@@ -913,3 +920,4 @@ function afficherListeDonnees(){
     fermerAffichageNotif();
 })*/
 
+//faire un file d'arianne pour revenir sur la page de message+ajouter ce qu'on recherche

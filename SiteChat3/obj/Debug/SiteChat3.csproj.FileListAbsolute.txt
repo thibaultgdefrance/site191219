@@ -172,4 +172,3 @@ C:\inetpub\wwwroot\SiteChat3\SiteChat3\bin\roslyn\vbc.exe.config
 C:\inetpub\wwwroot\SiteChat3\SiteChat3\bin\roslyn\vbc.rsp
 C:\inetpub\wwwroot\SiteChat3\SiteChat3\bin\roslyn\VBCSCompiler.exe
 C:\inetpub\wwwroot\SiteChat3\SiteChat3\bin\roslyn\VBCSCompiler.exe.config
-C:\inetpub\wwwroot\SiteChat3\SiteChat3\obj\Debug\SiteChat3.csprojAssemblyReference.cache
