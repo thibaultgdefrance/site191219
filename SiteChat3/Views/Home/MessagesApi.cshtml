@@ -18,28 +18,28 @@
 
 <div class="row" style="text-align:center">
     <div class="offset-md-2 col-md-2"><p id="titreDiscussionEnCour" style="overflow-x:auto;font-size:20px;color:grey;"></p></div>
-    <div class="col-md-2 col-md-offset-2" >
-        <input type="text" placeholder="recherche" class="form-control" onkeypress="rechercheContact('rechercheContact')" onblur="effacerRecherche('rechercheContact')" id="barreDeRechercheContact"/>
+    <div class="col-md-2 col-md-offset-2">
+        <input type="text" placeholder="recherche" class="form-control" onkeypress="rechercheContact('rechercheContact')" onblur="effacerRecherche('rechercheContact')" id="barreDeRechercheContact" />
         <div style="width:100%;background-color:white;position:absolute;z-index:+1;max-height:250px;overflow-y:auto;" id="rechercheContact">
 
         </div>
     </div>
-
+    <div id="affichageNotifications" class="col-md-2">
+        <img onclick="afficherNotifications()" id="boutonNotification" src="~/Content/Medias/bell.png" />
+    </div>
     <div class="col-md-offset-4 col-md-1" style="float:right;">
         @using (Html.BeginForm("Deconnexion", "Home", null, FormMethod.Post))
         {
 
 
 
-            <input type="submit" value="deconnexion" class="btn btn-success" style="width:100%;"/>
+            <input type="submit" value="deconnexion" class="btn btn-success" style="width:100%;" />
 
         }
 
     </div>
-    <div id="affichageNotifications" class="col-md-2">
-        <img onclick="afficherNotifications()" id="boutonNotification" src="~/Content/Medias/bell.png" />
-    </div>
-    
+
+
 </div>
 <div class="row">
     <div class="col-md-2" id="listeConversation" style="height:80vh;">

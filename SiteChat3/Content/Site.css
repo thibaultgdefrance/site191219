@@ -175,7 +175,8 @@ textarea {
     width: auto;
     height: auto;
     min-height: 100px;
-    max-height: 50%;
+    max-width: 50%;
+    max-height:1000px;
     border: 1px solid grey;
     display:inline-block;
     border-radius:20px;
@@ -187,10 +188,11 @@ textarea {
     min-height: 100px;
     width: auto;
     height: auto;
-    max-height: 50%;
+    max-width: 50%;
+    max-height: 1000px;
     border: 1px solid grey;
-    display:inline-block;
-    border-radius:20px;
+    display: inline-block;
+    border-radius: 20px;
 }
 
 .texteMessages {
@@ -234,9 +236,9 @@ textarea{
     margin:10px;
     padding:10px;
 }
-    .resultRecherche:hover {
-        background-color: #036bfc;
-    }
+.resultRecherche:hover {
+    background-color: #036bfc;
+}
 .resultRecherche:hover {
     background-color: black;
     color: grey;
@@ -257,7 +259,9 @@ textarea{
 #titreInfoDiscussion{
     margin-bottom:5px;
 }
-
+.modalDiscussion{
+    overflow-y:auto;
+}
 .ongletAdmin {
     background-image: linear-gradient(to right, #1c0010, #21111b, #281c25, #30282f, #383338, #383338, #383338, #383338, #30282f, #281c25, #21111b, #1c0010);
     border-bottom:1px solid grey;

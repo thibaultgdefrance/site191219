@@ -1,13 +1,25 @@
 ﻿var element = document.getElementById("affichageMessages");
 var tokenUtilisateur = document.getElementById("utilisateurToken");
 
-
-
+function boucle() {
+    if (document.getElementById("discussionToken") != "") {
+        afficherMessages(document.getElementById("discussionToken").value, document.getElementById("utilisateurToken").value);
+    }
+   
+    
+    
+    console.log("boucle");
+}
+function timerBoucle() {
+    setInterval(boucle, 10000)
+}
+timerBoucle();
 
 //créer une nouvelle discussion de groupe
 function creerDiscussion() {
     console.log("discussion créée!")
 }
+
 
 
 
@@ -391,40 +403,54 @@ function creationDiscussion() {
     var titre = document.getElementById("titreDiscussionCreee").value;
     var description = document.getElementById("tadescription").value;
     var createur = document.getElementById("utilisateurToken").value;
-    var urlPostDiscussion = "http://localhost:61994/api/Discussions?titre="+titre+"&description="+description+"&tokenUtilisateur="+createur;
-    $.ajax({
-        url: urlPostDiscussion,
-        dataType: 'json',
-        method: 'POST',
-        success: function (data) {
-            var urlPostUtilisateurDiscussion = "http://localhost:61994/api/UtilisateurDiscussions?utilisateurToken=" + createur;
-            $.ajax({
-                url: urlPostUtilisateurDiscussion,
-                dataType: 'json',
-                method: 'POST',
-                success: function (data) {
-                    fermerModal();
-                    afficherDiscussions();
-
-                }
-
-
-                ,
-
-                error: function () {
-                    console.log("érreure");
-                }
-            })
+    if (titre.length > 20 || description.length > 300) {
+        var modals = document.getElementsByClassName("modalDiscussion");
+        for (var i = 0; i < modals.length; i++) {
+            var messageErreure = document.createElement("p");
+            messageErreure.innerText = "titre 20 caractères max, description 300 caractères max";
+            messageErreure.setAttribute("style", "color:red;");
             
+            modals[i].appendChild(messageErreure);
         }
 
+    } else {
+        var urlPostDiscussion = "http://localhost:61994/api/Discussions?titre=" + titre + "&description=" + description + "&tokenUtilisateur=" + createur;
+        $.ajax({
+            url: urlPostDiscussion,
+            dataType: 'json',
+            method: 'POST',
+            success: function (data) {
+                var urlPostUtilisateurDiscussion = "http://localhost:61994/api/UtilisateurDiscussions?utilisateurToken=" + createur;
+                $.ajax({
+                    url: urlPostUtilisateurDiscussion,
+                    dataType: 'json',
+                    method: 'POST',
+                    success: function (data) {
+                        fermerModal();
+                        afficherDiscussions();
 
-        ,
+                    }
 
-        error: function () {
-            console.log("érreure");
-        }
-    })
+
+                    ,
+
+                    error: function () {
+                        console.log("érreure");
+                    }
+                })
+
+            }
+
+
+            ,
+
+            error: function () {
+                console.log("érreure");
+            }
+        })
+    }
+   
+    
     
 
    
@@ -697,8 +723,10 @@ function accepterInvitation(tokenNotif, idblocNotif) {
         dataType: 'json',
         method: 'POST',
         success: function (data) {
+            console.log("invitation acceptée");
+            effacerNotif(tokenNotif, idblocNotif);
             fermerNotif();
-
+            afficherDiscussions();
 
         }
 
@@ -711,8 +739,7 @@ function accepterInvitation(tokenNotif, idblocNotif) {
         }
     });
    
-    console.log("invitation acceptée");
-    effacerNotif(tokenNotif,idblocNotif);
+    
     
 }
 
