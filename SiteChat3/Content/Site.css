@@ -307,3 +307,8 @@ textarea{
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+#boutonDeconnexion{
+    
+    right:0px;
+}

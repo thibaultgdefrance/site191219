@@ -330,5 +330,11 @@ namespace SiteChat3.Controllers
         {
             return View();
         }
+
+
+        public ActionResult Erreur()
+        {
+            return View();
+        }
     }
 }

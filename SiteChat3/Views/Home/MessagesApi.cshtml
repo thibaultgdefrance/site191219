@@ -14,6 +14,7 @@
     .navbar-inverse .navbar-brand {
         color: white;
     }
+    
 </style>
 
 <div class="row" style="text-align:center">
@@ -27,7 +28,7 @@
     <div id="affichageNotifications" class="col-md-2">
         <img onclick="afficherNotifications()" id="boutonNotification" src="~/Content/Medias/bell.png" />
     </div>
-    <div class="col-md-offset-4 col-md-1" style="float:right;">
+    <!--<div class="col-md-offset-4 col-md-1" style="float:right;">
         @using (Html.BeginForm("Deconnexion", "Home", null, FormMethod.Post))
         {
 
@@ -37,7 +38,7 @@
 
         }
 
-    </div>
+    </div>-->
 
 
 </div>
@@ -77,6 +78,7 @@
 
 <input type="hidden" value=@ViewBag.requestToken id="utilisateurToken"/>
 <input type="hidden" id="discussionToken" />
+<input type="hidden" id="typeDiscussion" />
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

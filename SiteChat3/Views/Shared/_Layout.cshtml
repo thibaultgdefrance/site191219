@@ -25,11 +25,25 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    
+
                     <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
                     <li>@Html.ActionLink("CGU", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                    
+
                 </ul>
+                <div class="col-md-offset-4 col-md-1" style="float:right;">
+                    @using (Html.BeginForm("Deconnexion", "Home", null, FormMethod.Post))
+                    {
+
+
+
+                        <input type="submit" value="deconnexion" class="btn btn-success" style="width:auto;" id="boutonDeconnexion" />
+
+                    }
+
+                </div>
             </div>
         </div>
     </div>

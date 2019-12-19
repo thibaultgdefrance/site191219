@@ -376,6 +376,7 @@
     <Content Include="Views\Utilisateurs\Index.cshtml" />
     <Content Include="Views\Home\MessagesApi.cshtml" />
     <Content Include="Views\Home\Administration.cshtml" />
+    <Content Include="Views\Home\Erreur.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

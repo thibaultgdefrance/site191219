@@ -3,7 +3,12 @@ var tokenUtilisateur = document.getElementById("utilisateurToken");
 
 function boucle() {
     if (document.getElementById("discussionToken") != "") {
-        afficherMessages(document.getElementById("discussionToken").value, document.getElementById("utilisateurToken").value);
+        /*if (document.getElementById("typeDiscussion").value=="2") {
+            afficherMessages(document.getElementById("discussionToken").value, "2");
+        } else {
+            afficherMessages(document.getElementById("discussionToken").value, "1");
+        }*/
+        afficherMessages(document.getElementById("discussionToken").value, "3")
     }
    
     
@@ -29,7 +34,10 @@ function afficherMessages(discussionToken2,typeDiscussion) {
     var messagesVisibles = document.getElementsByClassName("contourMessage");
     
     document.getElementById("affichageMessages").innerHTML = "";
-    document.getElementById("affichageInfo").innerHTML = "";
+    if (typeDiscussion !=3) {
+        document.getElementById("affichageInfo").innerHTML = "";
+    }
+    
 
     /*for (var i = 0; i < messagesVisibles.length; i++) {
         messagesVisibles[i].setAttribute("style", "height:0px;");
@@ -39,6 +47,7 @@ function afficherMessages(discussionToken2,typeDiscussion) {
     
     console.log(discussionToken2);
     document.getElementById("discussionToken").value = discussionToken2;
+    document.getElementById("typeDiscussion").value = typeDiscussion;
     var tokenDiscussion = discussionToken2;
 
     var urlMessages = "http://localhost:61994/api/Messages?tokenDiscussion=" + document.getElementById("discussionToken").value + "&tokenUtilisateur=" + document.getElementById("utilisateurToken").value;
@@ -90,7 +99,10 @@ function afficherMessages(discussionToken2,typeDiscussion) {
                 }
 
                 element.scrollTop = element.scrollHeight;
-                afficherInfo(typeDiscussion);
+                if (typeDiscussion != "3") {
+                    afficherInfo(typeDiscussion);
+                }
+                
             }
         },
 
