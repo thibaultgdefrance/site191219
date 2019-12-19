@@ -9,22 +9,22 @@
         @using (Html.BeginForm("Inscription", "Home", null, FormMethod.Post, new { id = "formulaireInscription" }))
         {
             @Html.Label("LBNom", "nom:")
-            @Html.TextBox("nomInscription", "", new { @class = "form-control" })
+            @Html.TextBox("nomInscription", (string)ViewBag.nom, new { @class = "form-control" })
             @Html.Label("LBPrenom", "prénom:")
-            @Html.TextBox("prenonInscription", "", new { @class = "form-control" })
+            @Html.TextBox("prenomInscription", (string)ViewBag.prenom, new { @class = "form-control" })
             @Html.Label("LBEmailInscription", "e-mail:")
-            @Html.TextBox("emailIncription", "", new { @class = "form-control", type = "mail" })
+            @Html.TextBox("emailInscription", (string)ViewBag.mail, new { @class = "form-control", type = "mail" })
             @Html.Label("LBNumero", "numero de téléphone:")
-            @Html.TextBox("numeroInscription", "", new { @class = "form-control", type = "number" })
+            @Html.TextBox("numeroInscription", (string)ViewBag.tel, new { @class = "form-control", type = "number" })
             @Html.Label("LBPseudo", "pseudo:")
-            @Html.TextBox("pseudoInscription", "", new { @class = "form-control" })
+            @Html.TextBox("pseudoInscription",(string)ViewBag.pseudo, new { @class = "form-control" })
             @Html.Label("LBMDPInscription", "mot de passe:")
-            @Html.TextBox("MDPInscription", "", new { @class = "form-control", type = "password" })
+            @Html.TextBox("MDPInscription", (string)ViewBag.mdp, new { @class = "form-control", type = "password" })
             @Html.Label("LBMDPConfirmation", "confirmation mot de passe:")
-            @Html.TextBox("confirmationMDP", "", new { @class = "form-control", type = "password" })
+            @Html.TextBox("confirmationMDP", (string)ViewBag.confirmationmdp, new { @class = "form-control", type = "password" })
 
             <input class="datefield" data-val="true" data-val-required="Date is required"
-                   id="dateNaissance" name="dateNaissance" type="date" value="1/11/1989" />
+                   id="dateNaissance" name="dateNaissance" type="date" value=@ViewBag.date />
             @Html.Label("LBCGU", "J'ai lu et j'accepte les conditions générales d'utilisation.")
             @Html.CheckBox("CGU")
             <input type="submit" value="s'inscrire" class="btn btn-success" />

@@ -90,45 +90,131 @@ namespace SiteChat3.Controllers
         public  ActionResult Inscription(FormCollection collection)
         {
             string cgu = collection["CGU"];
+            string email = collection["pseudoInscription"];
+            ViewBag.nom = "";
+            ViewBag.prenom = "";
+            ViewBag.mail = "";
+            ViewBag.pseudo = "";
+            ViewBag.mdp = "";
+            ViewBag.confirmationmdp ="";
+            ViewBag.tel = "";
+            int utilisateurExiste2 = (from u in db.Utilisateur where u.PseudoUtilisateur == email  select u).Count();
             if (collection["nomInscription"]=="")
             {
                 ViewBag.messageErreure = "le champ nom est obligatoire";
+                
                 return View("index");
 
             }
-            else if (collection["prenonInscription"] =="")
+            else if (collection["nomInscription"].Length>30)
             {
-                ViewBag.messageErreure = "le champ prénom est obligatoire";
+                ViewBag.messageErreure = "le nom ne peut pas être supérieure à 20 caractères";
+                ViewBag.nom = collection["nomInscription"];
                 return View("index");
             }
-            else if (collection["emailIncription"] == "")
+            else if (collection["prenomInscription"] =="")
+            {
+                ViewBag.messageErreure = "le champ prénom est obligatoire";
+                ViewBag.nom = collection["nomInscription"];
+                return View("index");
+            }
+            else if (collection["prenomInscription"].Length>30)
+            {
+                ViewBag.messageErreure = "le prénom ne doit pas être supérieure à 20 caractères";
+                ViewBag.nom = collection["nomInscription"];
+                ViewBag.prenom = collection["prenomInscription"];
+                return View("index");
+            }
+            else if (collection["emailInscription"] == "")
             {
                 ViewBag.messageErreure = "le champ email est obligatoire";
+                ViewBag.nom = collection["nomInscription"];
+                ViewBag.prenom = collection["prenomInscription"];
                 return View("index");
             }
             else if (collection["pseudoInscription"] == "")
             {
+                ViewBag.nom = collection["nomInscription"];
+                ViewBag.prenom = collection["prenomInscription"];
+                ViewBag.mail = collection["emailInscription"];
+                ViewBag.tel = collection["numeroInscription"];
                 ViewBag.messageErreure = "le champ pseudo est obligatoire";
                 return View("index");
             }
-            
+            else if (collection["pseudoInscription"].Length>30)
+            {
+                ViewBag.messageErreure = "le pseudo doit faire 15 caractères max";
+                ViewBag.nom = collection["nomInscription"];
+                ViewBag.prenom = collection["prenomInscription"];
+                ViewBag.mail = collection["emailInscription"];
+                ViewBag.pseudo = collection["pseudoInscription"];
+                ViewBag.tel = collection["numeroInscription"];
+                return View("index");
+            }
+            else if (utilisateurExiste2>0)
+            {
+                ViewBag.messageErreure = "Ce pseudo éxiste déjà";
+                ViewBag.nom = collection["nomInscription"];
+                ViewBag.prenom = collection["prenomInscription"];
+                ViewBag.mail = collection["emailInscription"];
+                ViewBag.pseudo = collection["pseudoInscription"];
+                ViewBag.tel = collection["numeroInscription"];
+                return View("index");
+            }
             else if (collection["MDPInscription"] == "")
             {
+                ViewBag.nom = collection["nomInscription"];
+                ViewBag.prenom = collection["prenomInscription"];
+                ViewBag.pseudo = collection["pseudoInscription"];
+                ViewBag.mail = collection["emailInscription"];
+                ViewBag.tel = collection["numeroInscription"];
                 ViewBag.messageErreure = "le champ mot de passe est obligatoire";
+                
+                return View("index");
+            }
+            else if (collection["MDPInscription"].Length<8)
+            {
+                ViewBag.nom = collection["nomInscription"];
+                ViewBag.prenom = collection["prenomInscription"];
+                ViewBag.mail = collection["emailInscription"];
+                ViewBag.pseudo = collection["pseudoInscription"];
+                ViewBag.tel = collection["numeroInscription"];
+                ViewBag.messageErreure = "le mot de passe doit faire plus de 8 caractères";
                 return View("index");
             }
             else if (collection["confirmationMDP"] == "" || collection["confirmationMDP"] != collection["MDPInscription"])
             {
+                ViewBag.nom = collection["nomInscription"];
+                ViewBag.prenom = collection["prenomInscription"];
+                ViewBag.mail = collection["emailInscription"];
+                ViewBag.pseudo = collection["pseudoInscription"];
+                ViewBag.tel = collection["numeroInscription"];
+                ViewBag.mdp = collection["MDPInscription"]; 
                 ViewBag.messageErreure = "le mot de passe de confirmation est différent du mot de passe choisi";
                 return View("index");
             }
             else if (collection["dateNaissance"] == "")
             {
+                ViewBag.nom = collection["nomInscription"];
+                ViewBag.prenom = collection["prenomInscription"];
+                ViewBag.mail = collection["emailInscription"];
+                ViewBag.pseudo = collection["pseudoInscription"];
+                ViewBag.tel = collection["numeroInscription"];
+                ViewBag.mdp = collection["MDPInscription"];
+                ViewBag.confirmationmdp = collection["confirmationmdp"];
                 ViewBag.messageErreure = "veillez renseigner votre date de naissance";
                 return View("index");
             }
             else if (collection["CGU"]=="false")
             {
+                ViewBag.nom = collection["nomInscription"];
+                ViewBag.prenom = collection["prenomInscription"];
+                ViewBag.mail = collection["emailInscription"];
+                ViewBag.pseudo = collection["pseudoInscription"];
+                ViewBag.tel = collection["numeroInscription"];
+                ViewBag.mdp = collection["MDPInscription"];
+                ViewBag.confirmationmdp = collection["confirmationmdp"];
+                ViewBag.date = collection["dateNaissance"];
                 ViewBag.messageErreure = "Vous devez accepter les condition d'utilisation";
                 return View("index");
             }
@@ -151,9 +237,9 @@ namespace SiteChat3.Controllers
 
                         Utilisateur utilisateur = new Utilisateur();
                         utilisateur.NomUtilisateur = collection["nomInscription"];
-                        utilisateur.PrenomUtilisateur = collection["prenonInscription"];
+                        utilisateur.PrenomUtilisateur = collection["prenomInscription"];
                         utilisateur.PseudoUtilisateur = collection["pseudoInscription"];
-                        utilisateur.EmailUtilisateur = collection["emailIncription"];
+                        utilisateur.EmailUtilisateur = collection["emailInscription"];
                         utilisateur.IdAvatar = 1;
                         utilisateur.IdAcces = 4;
                         if (collection["numeroInscription"].ToString() == "")
@@ -173,10 +259,12 @@ namespace SiteChat3.Controllers
                         int tokenExist = (from u in db.Utilisateur where u.TokenUtilisateur == utilisateur.TokenUtilisateur select u).Count();
                         if (tokenExist>0)
                         {
+                            int test = tokenExist;
+                            
                             while (tokenExist>0)
                             {
                                 utilisateur.TokenUtilisateur = workflow.createToken();
-                                tokenExist= (from u in db.Utilisateur where u.TokenUtilisateur == utilisateur.TokenUtilisateur select u).Count();
+                                test--;
                             }
                         }
                         db.Utilisateur.Add(utilisateur);
@@ -236,6 +324,11 @@ namespace SiteChat3.Controllers
         {
             System.Web.HttpContext.Current.Session["acces"] = 4;
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Administration()
+        {
+            return View();
         }
     }
 }

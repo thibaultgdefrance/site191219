@@ -75,6 +75,7 @@
     <EntitySetMapping Name="Notification">
       <EntityTypeMapping TypeName="Chat2Model1.Notification">
         <MappingFragment StoreEntitySet="Notification">
+          <ScalarProperty Name="TokenNotification" ColumnName="TokenNotification" />
           <ScalarProperty Name="IdNotification" ColumnName="IdNotification" />
           <ScalarProperty Name="TexteNotification" ColumnName="TexteNotification" />
           <ScalarProperty Name="StatutNotification" ColumnName="StatutNotification" />

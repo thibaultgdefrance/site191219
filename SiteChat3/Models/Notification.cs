@@ -21,6 +21,7 @@ namespace SiteChat3.Models
         public int IdDestinataire { get; set; }
         public Nullable<int> IdDiscussion { get; set; }
         public int IdTypeNotification { get; set; }
+        public string TokenNotification { get; set; }
     
         public virtual Utilisateur Utilisateur { get; set; }
         public virtual Utilisateur Utilisateur1 { get; set; }

@@ -90,6 +90,7 @@
     <NavigationProperty Name="Utilisateur" Relationship="Self.FK__Notificat__IdCre__6C190EBB" FromRole="Notification" ToRole="Utilisateur" />
     <NavigationProperty Name="Utilisateur1" Relationship="Self.FK__Notificat__IdDes__6D0D32F4" FromRole="Notification" ToRole="Utilisateur" />
     <NavigationProperty Name="TypeNotification" Relationship="Self.FK__Notificat__IdTyp__6E01572D" FromRole="Notification" ToRole="TypeNotification" />
+    <Property Name="TokenNotification" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="StatutDiscussion">
     <Key>

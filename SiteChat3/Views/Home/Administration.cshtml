@@ -1,0 +1,40 @@
+﻿<style>
+    body {
+        background-image: none;
+        background-color: white;
+    }
+</style>
+
+<div class="row" style="margin:0px;padding:0px;">
+    <div class="col-md-2 listeOnglets" style="margin:0px;padding:0px;">
+        <ul style="margin:0px;padding:0px;">
+            <li class="ongletAdmin" style="margin:0px;padding:0px;" onclick="afficherListeDonnees()">
+                <p id="acces">Acces</p>
+            </li>
+            <li class="ongletAdmin">
+                <p id="avatar">Avatar</p>
+            </li>
+            <li class="ongletAdmin">
+                <p id="discussion">Discussion</p>
+            </li>
+            <li class="ongletAdmin">
+                <p id="Image">Images</p>
+            </li>
+            <li class="ongletAdmin">
+                <p id="message">Messages</p>
+            </li>
+            <li class="ongletAdmin">
+                <p id="utilisateur">Utilisateurs</p>
+            </li>
+
+
+        </ul>
+    </div>
+    <div class="col-md-10">
+        <div class="col-md-8" id="affichageListeDonnees" style="border:1px solid black;height:700px;overflow-y:auto;border-radius:5px;">
+            
+        </div>
+    </div>
+
+</div>
+<script src="~/Scripts/Administration.js"></script>

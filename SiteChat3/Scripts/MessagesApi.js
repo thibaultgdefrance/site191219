@@ -13,20 +13,23 @@ function creerDiscussion() {
 
 
 //afficher les messages quand on clic sur une discussion
-function afficherMessages(discussionToken2) {
+function afficherMessages(discussionToken2,typeDiscussion) {
     var messagesVisibles = document.getElementsByClassName("contourMessage");
+    
     document.getElementById("affichageMessages").innerHTML = "";
+    document.getElementById("affichageInfo").innerHTML = "";
+
     /*for (var i = 0; i < messagesVisibles.length; i++) {
         messagesVisibles[i].setAttribute("style", "height:0px;");
         messagesVisibles[i].setAttribute("style", "display:none;");
 
     }*/
-    ;
+    
     console.log(discussionToken2);
     document.getElementById("discussionToken").value = discussionToken2;
     var tokenDiscussion = discussionToken2;
-    var urlMessages = "http://localhost:61994/api/Messages?tokenDiscussion=" + tokenDiscussion;
-    var urlMessages = "http://localhost:61994/api/Messages?tokenDiscussion=" + tokenDiscussion + "&tokenUtilisateur=" + document.getElementById("utilisateurToken").value;
+
+    var urlMessages = "http://localhost:61994/api/Messages?tokenDiscussion=" + document.getElementById("discussionToken").value + "&tokenUtilisateur=" + document.getElementById("utilisateurToken").value;
     console.log(urlMessages);
     
     $.ajax({
@@ -37,31 +40,37 @@ function afficherMessages(discussionToken2) {
             if (data3 == null) {
                 console.log("null")
             } else {
+               
                 for (var i = 0; i < data3.length; i++) {
                     //discussionGroupe.textContent += data2[i].TitreDiscussion;
                     var contourMessage = document.createElement("div");
 
-
+                    var cadre = document.createElement("div");
                     var blocMessage = document.createElement("div");
                     blocMessage.setAttribute("id", "blocMessage" + i);
-                    if (data3[i].Verif) {
+                    if (data3[i].VerifMessage==true) {
                         blocMessage.setAttribute("class", "blocMessage2");
+                        cadre.setAttribute("class", "cadre2");
                     } else {
                         blocMessage.setAttribute("class", "blocMessage");
+                        cadre.setAttribute("class","cadre")
                     }
 
 
                     var texteMessage = document.createElement("p");
                     var dateEnvoi = document.createElement("p");
+                    
                     dateEnvoi.textContent = data3[i].PseudoUtilisateur + " " + data3[i].DateEnvoi;
                     dateEnvoi.setAttribute("class", "dateEnvoi");
                     texteMessage.setAttribute("id", data3[i].IdMessage);
                     texteMessage.setAttribute("class", "texteMessages");
                     texteMessage.textContent = data3[i].TexteMessage;
                     document.getElementById("affichageMessages").appendChild(contourMessage);
+                    cadre.appendChild(texteMessage);
+                    cadre.appendChild(dateEnvoi);
+                    blocMessage.appendChild(cadre);
                     contourMessage.appendChild(blocMessage);
-                    blocMessage.appendChild(texteMessage);
-                    blocMessage.appendChild(dateEnvoi);
+                    
                     var retour = document.createElement("br");
                     document.getElementById("affichageMessages").appendChild(retour);
                     document.getElementById("titreDiscussionEnCour").innerText = data3[i].TitreDiscussion;
@@ -69,6 +78,7 @@ function afficherMessages(discussionToken2) {
                 }
 
                 element.scrollTop = element.scrollHeight;
+                afficherInfo(typeDiscussion);
             }
         },
 
@@ -86,21 +96,115 @@ function afficherMessages(discussionToken2) {
 
 
 
+
+
+
+//afficher les infos d'une discussion
+function afficherInfo(typeDiscussion) {
+    console.log("affichageInfo" + typeDiscussion);
+    var urlInfo = "http://localhost:61994/api/Utilisateurs?tokenDiscussion=" + document.getElementById("discussionToken").value + "&tokenUtilisateur=" + document.getElementById("utilisateurToken").value;
+    $.ajax({
+        url: urlInfo,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data4) {
+            if (data4 == null) {
+                
+                console.log("null")
+            } else {
+
+                if (data4[0].Verif == true && typeDiscussion==2) {
+                    
+                    document.getElementById("affichageInfo").innerHTML = "";
+                    var contourBarreDeRecherche = document.createElement("div");
+                    contourBarreDeRecherche.setAttribute("id", "contourBarreDeRecherche");
+                    var barreDeRecherche = document.createElement("input");
+                    barreDeRecherche.setAttribute("type", "search");
+                    barreDeRecherche.setAttribute("placeholder", "inviter un nouveau participant");
+                    barreDeRecherche.setAttribute("id", "barreDeRecherche");
+                    barreDeRecherche.setAttribute("class", "form-control");
+                    barreDeRecherche.setAttribute("onkeypress", "rechercheParticipant('listeRecherche')");
+                    barreDeRecherche.setAttribute("onblur", "effacerRecherche('listeRecherche')");
+                    barreDeRecherche.setAttribute("value", "");
+                    var listeRecherche = document.createElement("div");
+                    listeRecherche.setAttribute("style", "height:auto;max-height:300px;width:100%;max-width:250px;background-color:white;position:fixed;overflow-y:auto");
+                    listeRecherche.setAttribute("id", "listeRecherche");
+                    contourBarreDeRecherche.appendChild(barreDeRecherche);
+                    contourBarreDeRecherche.appendChild(listeRecherche);
+                    document.getElementById("affichageInfo").appendChild(contourBarreDeRecherche);
+                    console.log("input créer");
+                } else {
+                    console.log("nope");
+                }
+
+                
+                
+                var titreParticipant = document.createElement("h2");
+                titreParticipant.innerText = "Participants";
+                document.getElementById("affichageInfo").appendChild(titreParticipant);
+                for (var i = 0; i < data4.length; i++) {
+                    var participant = document.createElement("div");
+                    var pseudoParticipant = document.createElement("p");
+                    pseudoParticipant.setAttribute("style","color:grey;font-size:20px;")
+                    var emailParticipant = document.createElement("p");
+                    emailParticipant.setAttribute("style", "color:grey;font-size:10px;")
+                    pseudoParticipant.innerText = data4[i].PseudoUtilisateur;
+                    emailParticipant.innerText = data4[i].EmailUtilisateur;
+                    participant.appendChild(pseudoParticipant);
+                    participant.appendChild(emailParticipant);
+                    participant.setAttribute("onclick", "creerNotif");
+                    document.getElementById("affichageInfo").appendChild(participant);
+                    console.log("utilisateur ajouté");
+                }  
+            }
+        },
+
+
+        error: function () {
+            console.log("erreure");
+        }
+
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //afficher les discussions de l'utilisateur 
 
 
+
+
+
+
 function afficherDiscussions() {
-    document.getElementById("discussionsGroupe").innerHTML = "";
+        document.getElementById("discussionsGroupe").innerHTML = "";
         var discussionGroupe = document.createElement("p");
         discussionsGroupe.appendChild(discussionGroupe);
         var utilisateurToken = document.getElementById('utilisateurToken').value;
         var urlGetDiscussion = 'http://localhost:61994/api/Discussions?token=' + utilisateurToken;
-        console.log(urlGetDiscussion);
+        console.log("!!"+urlGetDiscussion);
         $.ajax({
             url: urlGetDiscussion,
             type: 'GET',
             dataType: 'json',
             success: function (data2) {
+                console.log(data2);
                 for (var i = 0; i < data2.length; i++) {
                     //discussionGroupe.textContent += data2[i].TitreDiscussion;
                     var x = document.createElement("div");
@@ -109,7 +213,7 @@ function afficherDiscussions() {
                     b.setAttribute("id", data2[i].TokenDiscussion);
                     b.textContent = data2[i].TitreDiscussion;
                     b.setAttribute("class", "titreDiscussion");
-                    b.setAttribute("onClick", "afficherMessages(" + "'" + data2[i].TokenDiscussion + "'" + ")");
+                    b.setAttribute("onClick", "afficherMessages(" + "'" + data2[i].TokenDiscussion + "'" + ",2)");
 
 
                     discussionGroupe.appendChild(x);
@@ -119,15 +223,78 @@ function afficherDiscussions() {
 
             },
 
-            error: function () {
-
+            error: function (data2) {
+                console.log("Erreur:"+data2);
             }
 
         });
     }    
     
 
-afficherDiscussions()
+afficherDiscussions();
+afficherContacts();
+
+function afficherContacts() {
+    document.getElementById("listeContacts").innerHTML = "";
+    var listeContacts = document.getElementById("listeContacts");
+    
+    
+    
+    var urlGetContact = "http://localhost:61994/api/Discussions?token=" + document.getElementById("utilisateurToken").value + "&dif=1";
+    $.ajax({
+        url: urlGetContact,
+        dataType: 'json',
+        method: 'GET',
+        success: function (data2) {
+            if (data2 != null) {
+                for (var i = 0; i < data2.length; i++) {
+                    
+                    var blocContact = document.createElement("div");
+                    blocContact.setAttribute("class", "blocDiscussion");
+                    var nomContact = document.createElement("button");
+                    nomContact.setAttribute("class", "titreDiscussion");
+                    nomContact.innerText = data2[i].NomContact;
+                    blocContact.appendChild(nomContact);
+                    token = data2[i].TokenDiscussion;
+                    nomContact.setAttribute("onclick", "afficherMessages(" + "'" + data2[i].TokenDiscussion + "'" + ",1)");
+                    /*blocContact.addEventListener("click", function () {
+                        afficherMessages(token);
+
+                    });*/
+                    listeContacts.appendChild(blocContact);
+                }
+            }
+            
+            
+        }
+
+
+        ,
+
+        error: function () {
+            console.log("érreure");
+        }
+
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //envoyer le message dans la discussion correspondante
 
@@ -158,6 +325,16 @@ function envoyerMessage() {
     });
     
 }
+
+
+
+
+
+
+
+
+
+
 
 function creerModal() {
     console.log("modal créee");
@@ -214,7 +391,7 @@ function creationDiscussion() {
     var titre = document.getElementById("titreDiscussionCreee").value;
     var description = document.getElementById("tadescription").value;
     var createur = document.getElementById("utilisateurToken").value;
-    var urlPostDiscussion = "http://localhost:61994/api/Discussions?titre=" + titre + "&description=" + description + "&tokenUtilisateur=" + createur;
+    var urlPostDiscussion = "http://localhost:61994/api/Discussions?titre="+titre+"&description="+description+"&tokenUtilisateur="+createur;
     $.ajax({
         url: urlPostDiscussion,
         dataType: 'json',
@@ -252,3 +429,448 @@ function creationDiscussion() {
 
    
 }
+
+
+function rechercheParticipant(cible) {
+    
+    document.getElementById(cible).innerHTML = "";
+    var textetest = document.createElement("p");
+    textetest.innerText = "test";
+    if (cible=="rechercheContact") {
+        var texteRecherche = document.getElementById("barreDeRechercheContact").value;
+    } else {
+        var texteRecherche = document.getElementById("barreDeRecherche").value;
+    }
+    
+    var urlRecherche = "http://localhost:61994/api/Utilisateurs?entree="+texteRecherche;
+    console.log(urlRecherche);
+    $.ajax({
+        url: urlRecherche,
+        dataType: 'json',
+        method: 'GET',
+        success: function (data5) {
+            
+            
+            for (var i = 0; i < data5.length; i++) {
+                var resultRecherche = document.createElement("div");
+                var pseudoResult = (document.createElement("p"));
+                
+                pseudoResult.innerHTML = data5[i].PseudoUtilisateur;
+                var emailResult = (document.createElement("p"));
+                emailResult.innerText = data5[i].EmailUtilisateur;
+                resultRecherche.appendChild(pseudoResult);
+                resultRecherche.appendChild(emailResult);
+                resultRecherche.setAttribute("onclick", "creationModalNotif("+"'" +data5[i].EmailUtilisateur+"'"+",'groupe')");
+                resultRecherche.setAttribute("class", "resultRecherche");
+                resultRecherche.setAttribute("id", data5[i].EmailUtilisateur);
+                document.getElementById(cible).appendChild(resultRecherche);
+
+                
+            }
+            
+
+        }
+
+
+        ,
+
+        error: function () {
+            console.log("erreure");
+        }
+    })
+    
+}
+
+
+
+
+
+
+function rechercheContact(cible) {
+    document.getElementById(cible).innerHTML = "";
+    var textetest = document.createElement("p");
+    textetest.innerText = "test";
+    if (cible == "rechercheContact") {
+        var texteRecherche = document.getElementById("barreDeRechercheContact").value;
+    } else {
+        var texteRecherche = document.getElementById("barreDeRecherche").value;
+    }
+
+    var urlRecherche = "http://localhost:61994/api/Utilisateurs?entree=" + texteRecherche;
+    console.log(urlRecherche);
+    $.ajax({
+        url: urlRecherche,
+        dataType: 'json',
+        method: 'GET',
+        success: function (data5) {
+
+
+            for (var i = 0; i < data5.length; i++) {
+                var resultRecherche = document.createElement("div");
+                var pseudoResult = (document.createElement("p"));
+
+                pseudoResult.innerHTML = data5[i].PseudoUtilisateur;
+                var emailResult = (document.createElement("p"));
+                emailResult.innerText = data5[i].EmailUtilisateur;
+                resultRecherche.appendChild(pseudoResult);
+                resultRecherche.appendChild(emailResult);
+                resultRecherche.setAttribute("onclick", "creationModalNotif(" + "'" + data5[i].EmailUtilisateur + "'" + ",'contact')");
+                resultRecherche.setAttribute("class", "resultRecherche");
+                resultRecherche.setAttribute("id", data5[i].EmailUtilisateur);
+                document.getElementById(cible).appendChild(resultRecherche);
+
+
+            }
+
+
+        }
+
+
+        ,
+
+        error: function () {
+            console.log("erreure");
+        }
+    })
+}
+
+
+
+
+function effacerRecherche(cible) {
+    setTimeout(function () { document.getElementById(cible).innerHTML = ""; }, 500);
+    
+}
+
+function creationModalNotif(email, typeInvitation) {
+    if (typeInvitation == "groupe") {
+        document.getElementById("modaleEnvoiNotif").innerHTML = "";
+        document.getElementById("modaleEnvoiNotif").setAttribute("style", "background-color:white;height:auto;width:20%;position:fixed;top:20vh;left:40vw;border-radius:20px;padding:50px;overflow:auto;borde:1px solid grey;display:inline;")
+        var texteEmail = document.createElement("p");
+        texteEmail.innerText = "voulez-vous inviter " + email + " à participer à cette discussion?";
+        var btnValiderNotif = document.createElement("input");
+        btnValiderNotif.setAttribute("type", "submit");
+        btnValiderNotif.setAttribute("class", "form-control");
+        btnValiderNotif.setAttribute("value", "valider");
+        btnValiderNotif.setAttribute("onclick", "envoyerNotif(" + "'" + email + "'" + ")");
+        var btnAnnulerNotif = document.createElement("input");
+        btnAnnulerNotif.setAttribute("type", "submit");
+        btnAnnulerNotif.setAttribute("class", "form-control");
+        btnAnnulerNotif.setAttribute("value", "annuler");
+        btnAnnulerNotif.setAttribute("onclick", "fermerNotif()");
+        document.getElementById("modaleEnvoiNotif").appendChild(texteEmail);
+        document.getElementById("modaleEnvoiNotif").appendChild(btnValiderNotif);
+        document.getElementById("modaleEnvoiNotif").appendChild(btnAnnulerNotif);
+    } else {
+        document.getElementById("modaleEnvoiNotif").innerHTML = "";
+        document.getElementById("modaleEnvoiNotif").setAttribute("style", "background-color:white;height:auto;width:20%;position:fixed;top:20vh;left:40vw;border-radius:20px;padding:50px;overflow:auto;borde:1px solid grey;display:inline;")
+        var texteEmail = document.createElement("p");
+        texteEmail.innerText = "voulez-vous inviter " + email + " à faire partie de vos contacts?";
+        var btnValiderNotif = document.createElement("input");
+        btnValiderNotif.setAttribute("type", "submit");
+        btnValiderNotif.setAttribute("class", "form-control");
+        btnValiderNotif.setAttribute("value", "valider");
+        btnValiderNotif.setAttribute("onclick", "envoyerDemandeContact(" + "'" + email + "'" + ")");
+        var btnAnnulerNotif = document.createElement("input");
+        btnAnnulerNotif.setAttribute("type", "submit");
+        btnAnnulerNotif.setAttribute("class", "form-control");
+        btnAnnulerNotif.setAttribute("value", "annuler");
+        document.getElementById("modaleEnvoiNotif").appendChild(texteEmail);
+        document.getElementById("modaleEnvoiNotif").appendChild(btnValiderNotif);
+        document.getElementById("modaleEnvoiNotif").appendChild(btnAnnulerNotif);
+    }
+    
+
+}
+
+function envoyerNotif(mail) {
+    var urlPostNotif = "http://localhost:61994/api/Notifications?tokenUtilisateur=" + document.getElementById("utilisateurToken").value + "&emailDestinataire=" + mail + "&tokenDiscussion=" + document.getElementById("discussionToken").value;
+    console.log(urlPostNotif);
+    $.ajax({
+        url: urlPostNotif,
+        dataType: 'json',
+        method: 'POST',
+        success: function (data) {
+            fermerNotif();
+            
+
+        }
+
+
+        ,
+
+        error: function () {
+            console.log("érreure");
+            fermerNotif();
+        }
+    })
+           
+
+}
+
+function fermerNotif() {
+    document.getElementById("modaleEnvoiNotif").innerHTML = "";
+    document.getElementById("modaleEnvoiNotif").setAttribute("style", "background-color:white;height:auto;width:20%;position:fixed;top:20vh;left:40vw;border-radius:20px;padding:50px;display:none;box-shadow: 5px 5px 20px;");
+}
+
+
+function afficherNotifications() {
+    console.log("notifications affichées");
+    document.getElementById("modaleAffichageNotif").innerHTML = "";
+    document.getElementById("modaleAffichageNotif").setAttribute("style", "background-color: white; height: auto;max-height:500px; width: 20%; position: fixed; top: 20vh; left: 40vw; border - radius: 20px; padding: 50px;overflow:auto;border-radius:20px;border:1px solid grey;display:inline");
+    var btnFermeture = document.createElement("button");
+    btnFermeture.innerHTML="fermer";
+    btnFermeture.setAttribute("class", "btn btn-danger")
+    btnFermeture.setAttribute("style", "color:white;right:10px;top:10px;position:absolute;box-shadow: 5px 5px 20px;");
+    btnFermeture.setAttribute("onclick", "fermerAffichageNotif()");
+    document.getElementById("modaleAffichageNotif").appendChild(btnFermeture);
+    var urlGetNotif = "http://localhost:61994/api/Notifications?tokenUtilisateur=" + document.getElementById("utilisateurToken").value;
+    $.ajax({
+        url: urlGetNotif,
+        dataType: 'json',
+        method: 'GET',
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].TitreDiscussion == null) {
+                    var blocNotification = document.createElement("div");
+                    blocNotification.setAttribute("id", "blocNotification" + i);
+                    var texteNotif = data[i].EmailCreateur + " veut vous ajouter à ses contacts";
+                    var pNotif = document.createElement("p");
+                    pNotif.innerText = texteNotif;
+                    var btnAccepterInvitation = document.createElement("input");
+                    btnAccepterInvitation.setAttribute("type", "submit");
+                    btnAccepterInvitation.setAttribute("class", "form-control");
+                    btnAccepterInvitation.setAttribute("value", "accepter");
+                    btnAccepterInvitation.setAttribute("onclick", "accepterContact(" + "'" + data[i].TokenNotification + "'" + "," + "'" + "blocNotification" + i + "'" + ")");
+                    var btnAnnuler = document.createElement("input");
+                    btnAnnuler.setAttribute("type", "submit");
+                    btnAnnuler.setAttribute("class", "form-control");
+                    btnAnnuler.setAttribute("value", "décliner");
+                    btnAnnuler.setAttribute("onclick", "declinerInvitation(" + "'" + data[i].TokenNotification + "'" + "," + "'" + "blocNotification" + i + "'" + ")");
+                    blocNotification.appendChild(pNotif)
+                    blocNotification.appendChild(btnAccepterInvitation);
+                    blocNotification.appendChild(btnAnnuler);
+                    document.getElementById("modaleAffichageNotif").appendChild(blocNotification);
+                } else {
+                    var blocNotification = document.createElement("div");
+                    blocNotification.setAttribute("id", "blocNotification" + i);
+                    var texteNotif = data[i].EmailCreateur + " vous invite à rejoindre la discussion " + data[i].TitreDiscussion;
+                    var pNotif = document.createElement("p");
+                    pNotif.innerText = texteNotif;
+                    var btnAccepterInvitation = document.createElement("input");
+                    btnAccepterInvitation.setAttribute("type", "submit");
+                    btnAccepterInvitation.setAttribute("class", "form-control");
+                    btnAccepterInvitation.setAttribute("value", "accepter");
+                    btnAccepterInvitation.setAttribute("onclick", "accepterInvitation(" + "'" + data[i].TokenNotification + "'" + "," + "'" + "blocNotification" + i + "'" + ")");
+                    var btnAnnuler = document.createElement("input");
+                    btnAnnuler.setAttribute("type", "submit");
+                    btnAnnuler.setAttribute("class", "form-control");
+                    btnAnnuler.setAttribute("value", "décliner");
+                    btnAnnuler.setAttribute("onclick", "declinerInvitation(" + "'" + data[i].TokenNotification + "'" + "," + "'" + "blocNotification" + i + "'" + ")");
+                    blocNotification.appendChild(pNotif)
+                    blocNotification.appendChild(btnAccepterInvitation);
+                    blocNotification.appendChild(btnAnnuler);
+                    document.getElementById("modaleAffichageNotif").appendChild(blocNotification);
+                }
+                
+            }
+
+
+        }
+
+
+        ,
+
+        error: function () {
+            console.log("érreure");
+        }
+    })
+
+    
+
+}
+function accepterInvitation(tokenNotif, idblocNotif) {
+    document.getElementById(idblocNotif).innerHTML = "";
+    var urlPostUtilisateurDiscussion = "http://localhost:61994/api/UtilisateurDiscussions?utilisateurToken=" + document.getElementById("utilisateurToken").value + "&tokenNotif=" + tokenNotif;
+    $.ajax({
+        url: urlPostUtilisateurDiscussion,
+        dataType: 'json',
+        method: 'POST',
+        success: function (data) {
+            fermerNotif();
+
+
+        }
+
+
+        ,
+
+        error: function () {
+            console.log("érreure");
+            fermerNotif();
+        }
+    });
+   
+    console.log("invitation acceptée");
+    effacerNotif(tokenNotif,idblocNotif);
+    
+}
+
+function declinerInvitation(tokenNotif, idblocNotif) {
+    document.getElementById(idblocNotif).innerHTML = "";
+    console.log("invitation déclinée");
+    effacerNotif(tokenNotif, idblocNotif);
+}
+
+function fermerAffichageNotif() {
+    
+    document.getElementById("modaleAffichageNotif").innerHTML = "";
+    document.getElementById("modaleAffichageNotif").setAttribute("style", "background-color: white; height: auto;max-height:500px; width: 200px; position: fixed; top: 20vh; left: 40vw; border - radius: 20px; padding: 50px;display:none");
+}
+
+function effacerNotif(tokenNotif, idblocNotif) {
+    
+    var urlPostSuppressionNotification = "http://localhost:61994/api/Notifications?tokenNotification=" + tokenNotif;
+    $.ajax({
+        url: urlPostSuppressionNotification,
+        dataType: 'json',
+        method: 'POST',
+        success: function (data) {
+            fermerNotif();
+
+
+        }
+
+
+        ,
+
+        error: function () {
+            console.log("érreure");
+            fermerNotif();
+        }
+    });
+}
+
+function envoyerDemandeContact(mail) {
+    var urlDemandeContact = "http://localhost:61994/api/Notifications?tokenUtilisateur=" + document.getElementById("utilisateurToken").value + "&emailDestinataire=" + mail;
+    $.ajax({
+        url: urlDemandeContact,
+        dataType: 'json',
+        method: 'POST',
+        success: function (data) {
+            fermerNotif();
+
+
+        }
+
+
+        ,
+
+        error: function () {
+            console.log("érreure!");
+            fermerNotif();
+        }
+    });
+}
+
+
+function accepterContact(tokenNotif,idBlocNotif) {
+    document.getElementById(idBlocNotif).innerHTML = "";
+    var urlPostDiscussionContact = "http://localhost:61994/api/Discussions?tokenNotification=" + tokenNotif;
+    $.ajax({
+        url: urlPostDiscussionContact,
+        dataType: 'json',
+        method: 'POST',
+        success: function (data) {
+            console.log("discussion créee")
+            var urlPostUtilisateurDiscussion = "http://localhost:61994/api/UtilisateurDiscussions?utilisateurToken=" + document.getElementById("utilisateurToken").value + "&tokenNotif=" + tokenNotif + "&contact=1";
+            $.ajax({
+                url: urlPostUtilisateurDiscussion,
+                dataType: 'json',
+                method: 'POST',
+                success: function (data) {
+                    effacerNotif(tokenNotif, idBlocNotif);
+                    fermerNotif();
+                    afficherContacts();
+
+                }
+
+
+                ,
+
+                error: function () {
+                    console.log("érreure bordel");
+                    fermerNotif();
+                }
+            });
+    /*var urlPostUtilisateurDiscussion1 = "http://localhost:61994/api/UtilisateurDiscussions?utilisateurToken=" + document.getElementById("utilisateurToken").value + "&tokenNotif=" + tokenNotif + "&contact1=1";
+        $.ajax({
+            url: urlPostUtilisateurDiscussion1,
+            dataType: 'json',
+            method: 'POST',
+            success: function (data) {
+                console.log("premier utilisateurDiscussion crée")
+    
+    
+            }
+    
+    
+            ,
+    
+            error: function () {
+                console.log("érreure");
+               
+            }
+        });
+    
+       
+       
+        var urlPostUtilisateurDiscussion2 = "http://localhost:61994/api/UtilisateurDiscussions?utilisateurToken=" + document.getElementById("utilisateurToken").value + "&tokenNotif=" + tokenNotif + "&contact1=2";
+        $.ajax({
+            url: urlPostUtilisateurDiscussion2,
+            dataType: 'json',
+            method: 'POST',
+            success: function (data) {
+                console.log("deuxième utilisateurDiscussion crée")
+                console.log("contact acceptée");
+    
+    
+            }
+    
+    
+            ,
+    
+            error: function () {
+                console.log("érreure");
+                fermerNotif();
+            }
+        });*/
+
+        }
+
+
+        ,
+
+        error: function () {
+            console.log("érreure");
+            
+        }
+    });
+
+   
+
+    
+   
+    
+}
+
+
+function afficherListeDonnees(){
+    console.log("liste de données affichée");
+}
+
+
+/*document.getElementById("modaleAffichageNotif").addEventListener("blur", function () {
+    fermerAffichageNotif();
+})*/
+

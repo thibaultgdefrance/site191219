@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Chat2Model1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Chat2Model1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Acces">
           <Key>
             <PropertyRef Name="IdAcces" />
@@ -80,6 +80,7 @@
           <Property Name="IdDestinataire" Type="int" Nullable="false" />
           <Property Name="IdDiscussion" Type="int" />
           <Property Name="IdTypeNotification" Type="int" Nullable="false" />
+          <Property Name="TokenNotification" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="StatutDiscussion">
           <Key>
@@ -416,8 +417,7 @@
             <End Role="UtilisateurDiscussion" EntitySet="UtilisateurDiscussion" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Chat2Model1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -511,6 +511,7 @@
           <NavigationProperty Name="Utilisateur" Relationship="Self.FK__Notificat__IdCre__6C190EBB" FromRole="Notification" ToRole="Utilisateur" />
           <NavigationProperty Name="Utilisateur1" Relationship="Self.FK__Notificat__IdDes__6D0D32F4" FromRole="Notification" ToRole="Utilisateur" />
           <NavigationProperty Name="TypeNotification" Relationship="Self.FK__Notificat__IdTyp__6E01572D" FromRole="Notification" ToRole="TypeNotification" />
+          <Property Name="TokenNotification" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="StatutDiscussion">
           <Key>
@@ -944,6 +945,7 @@
           <EntitySetMapping Name="Notification">
             <EntityTypeMapping TypeName="Chat2Model1.Notification">
               <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="TokenNotification" ColumnName="TokenNotification" />
                 <ScalarProperty Name="IdNotification" ColumnName="IdNotification" />
                 <ScalarProperty Name="TexteNotification" ColumnName="TexteNotification" />
                 <ScalarProperty Name="StatutNotification" ColumnName="StatutNotification" />

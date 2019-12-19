@@ -75,6 +75,7 @@
     <Property Name="IdDestinataire" Type="int" Nullable="false" />
     <Property Name="IdDiscussion" Type="int" />
     <Property Name="IdTypeNotification" Type="int" Nullable="false" />
+    <Property Name="TokenNotification" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="StatutDiscussion">
     <Key>
