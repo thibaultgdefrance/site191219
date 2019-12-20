@@ -7,6 +7,7 @@ body {
     /*padding-bottom: 20px;*/
     background-image: radial-gradient(circle, #f4ff00, #daff00, #beff00, #9eff00, #78ff00, #62ff00, #46ff01, #03ff08, #05ff06, #07ff04, #09ff02, #0bff00);
     height: 100%;
+    /*background-color:#0d3e8c;*/
     /*font-family: "Segoe UI Semibold","Segoe WP Semibold","Segoe WP","Segoe UI",Arial,Sans-Serif;*/
 }
 
@@ -300,8 +301,13 @@ textarea{
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius:10px;
+    /*background: #888;*/
+    border-radius: 10px;
+
+    background-color: #818B99;
+    border: 3px solid transparent;
+
+    background-clip: content-box;
 }
 
 /* Handle on hover */

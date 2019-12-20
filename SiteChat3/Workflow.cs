@@ -7,11 +7,14 @@ using SiteChat3.Models;
 using System.Configuration;
 using System.Globalization;
 using System.Data.Entity;
+using System.Net.Mail;
 
 namespace SiteChat3
 {
     public class Workflow
     {
+        string MailWebMaster = ConfigurationManager.AppSettings["mailadmin"];
+        string SmtpWebMaster = ConfigurationManager.AppSettings["Smpt"];
         public string createToken()
         {
             
@@ -49,6 +52,24 @@ namespace SiteChat3
             }
             
            
+        }
+
+
+        public void envoiMail(string email,string sujetEmail,string messageEmail)
+        {
+            try
+            {
+                MailMessage courier = new MailMessage(MailWebMaster, email, sujetEmail,messageEmail);
+                courier.BodyEncoding = System.Text.Encoding.UTF8;
+                courier.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient(SmtpWebMaster);
+                smtp.Send(courier);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

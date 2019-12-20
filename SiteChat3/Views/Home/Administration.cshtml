@@ -1,7 +1,7 @@
 ﻿<style>
     body {
-        background-image: none;
-        background-color: white;
+        
+        background-image: linear-gradient(to right top, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff);
     }
 </style>
 
@@ -23,7 +23,7 @@
             <li class="ongletAdmin">
                 <p id="message">Messages</p>
             </li>
-            <li class="ongletAdmin">
+            <li class="ongletAdmin" onclick="afficherListeDonnees('../Utilisateurs')">
                 <p id="utilisateur">Utilisateurs</p>
             </li>
 
@@ -31,7 +31,7 @@
         </ul>
     </div>
     <div class="col-md-10">
-        <div class="col-md-8" id="affichageListeDonnees" style="border:1px solid black;height:700px;overflow-y:auto;border-radius:5px;">
+        <div class="col-md-8" id="affichageListeDonnees" style="border:1px solid black;height:700px;overflow:auto;border-radius:5px;">
             
         </div>
     </div>

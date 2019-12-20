@@ -13,7 +13,7 @@ namespace SiteChat3.Controllers
 {
     public class UtilisateursController : Controller
     {
-        private Chat2Entities db = new Chat2Entities();
+        private Chat2Entities1 db = new Chat2Entities1();
 
         // GET: Utilisateurs
         public async Task<ActionResult> Index()

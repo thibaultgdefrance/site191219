@@ -12,8 +12,19 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
+@{ 
+    string css = "";
+    if (true)
+    {
+        css = "barreacceuilAdmin";
+    }
+    else
+    {
+        css = "barreAccueil";
+    }
+}
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top " style="position:relative;background-color:#3d3252">
+    <div class="navbar navbar-inverse navbar-fixed-top " style="position:relative;background-color:#3d3252" id=@css>
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
